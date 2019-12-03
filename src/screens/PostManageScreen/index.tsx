@@ -21,17 +21,19 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
     REST.get(`users/${props.user.email}/posts`)
       .then(res => {
         setPosts(res.data.posts)
-      })
+      });
   }, []);
 
-  const onEdit = () => {
+  const onEdit = (id) => {
 
   };
 
   const onDelete = (id) => {
     REST.delete(`posts/${id}`)
       .then(res => {
-        console.log(res.data)
+        if (res.data) {
+          setPosts(posts.filter(item => item.id !== id))
+        }
       })
   };
 

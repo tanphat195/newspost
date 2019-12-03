@@ -33,6 +33,13 @@ export default StyleSheet.create({
     lineHeight: 26,
     color: 'rgba(0,0,0,0.7)',
   },
+  relatedText: {
+    textTransform: 'uppercase',
+    fontSize: 24,
+    fontWeight: '600',
+    color: 'rgba(0,0,0,0.8)',
+    textAlign: 'center',
+  },
   relatedPosts: {
     flexDirection: 'column',
     padding: 20,

@@ -39,7 +39,21 @@ const signUp = async (body, callback) => {
 
     const newUser = await User.createUser(user)
     if (newUser) {
-      return callback(null, `${email} account registered successfully`)
+      const secret = bcrypt.genSaltSync(10)
+      const token = jwt.sign({ email }, secret, { expiresIn: config.jwtExpiresIn })
+
+      const _cookie = {
+        email,
+        token,
+      }
+      const get_logged = await LoggedUser.getLoggedUser(email)
+      
+      if (get_logged) {
+        return callback(null, {_cookie, user: get_user})
+      } else {
+        await LoggedUser.createLoggedUser({ email, token })
+        return callback(null, {_cookie, user: get_user})
+      }
     } else {
       return callback(err)
     }
@@ -73,7 +87,7 @@ const signIn = async (body, callback) => {
         if (get_logged) {
           callback(null, {_cookie, user: get_user})
         } else {
-          await LoggedUser.createLoggedUser(email)
+          await LoggedUser.createLoggedUser({ email, token })
           callback(null, {_cookie, user: get_user})
         }
       } else {
@@ -165,7 +179,7 @@ const signOut = async (_email, callback) => {
 
 const fetch = async (authCookie, callback) => {
   if (authCookie && authCookie.email && authCookie.token) {
-    const { email } = authCookie
+    const { email, token } = authCookie
     const _email = email.toLocaleLowerCase()
 
     const get_logged = await LoggedUser.getLoggedUser(_email)
@@ -176,6 +190,8 @@ const fetch = async (authCookie, callback) => {
       } else {
         callback({status: 401, msg: 'User not found'})
       }
+    } else {
+      callback(null, {})
     }
   } else {
     callback(null, {})

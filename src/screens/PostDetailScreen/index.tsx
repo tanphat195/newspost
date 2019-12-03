@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, Image } from 'react-native';
-import { NavigationStackProp, NavigationStackScreenProps, NavigationStackScreenComponent } from 'react-navigation-stack';
+import {
+  NavigationStackProp,
+  NavigationStackScreenProps,
+  NavigationStackScreenComponent
+} from 'react-navigation-stack';
 import moment from 'moment';
 import ImperativeScrollView, { ImperativeScrollViewHandles } from '../../components/atoms/ImperativeScrollView';
 import PostCard from '../../components/molecules/PostCard';
@@ -30,7 +34,6 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
   useEffect(() => {
     scrollViewRef.current.scrollToStart()
     setPost(props.navigation.getParam('post'))
-    
   }, [props.navigation.getParam('post')])
 
   useEffect(() => {
@@ -52,6 +55,7 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
         </View>
 
         <View style={styles.relatedPosts}>
+          <Text style={styles.relatedText}>You may be interested</Text>
           {related_posts.map(post => (
             <View key={post.id} style={styles.wrap}>
               <Divider />

@@ -1,12 +1,12 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const REST = axios.create({
-  baseURL: 'http://10.100.0.108:3456/api',
+  baseURL: 'http://192.168.1.6:3456/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
-})
+});
 
 REST.interceptors.request.use(async (config) => {
   try {
@@ -26,6 +26,6 @@ REST.interceptors.response.use(res => res, (error) => {
   } else {
     return Promise.reject(error);
   }
-})
+});
 
-export default REST
+export default REST;

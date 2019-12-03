@@ -4,10 +4,6 @@ const getPostById = (post_id) => {
   return Post.getPostById(post_id)
 }
 
-const getPostsRange = (start, end) => {
-  return Post.getPostsRange(start, end)
-}
-
 const getPosts = () => {
   return Post.getPosts()
 }
@@ -20,10 +16,14 @@ const createPost = post => {
   return Post.createPost(post)
 }
 
+const deletePost = (post_id) => {
+  return Post.deletePost(post_id)
+}
+
 module.exports = {
   getPostById,
-  getPostsRange,
   getPosts,
   getPostsByUserEmail,
   createPost,
+  deletePost,
 }

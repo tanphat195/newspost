@@ -6,7 +6,7 @@ import styles from './styles';
 
 const AuthLoadingScreen: NavigationStackScreenComponent = (props) => {
   useEffect(() => {
-    props.fetchUser((err, user) => {
+    props.fetchUser(async (err, user) => {
       if (!err || user.email) {
         props.navigation.navigate('App');
       } else {
@@ -17,7 +17,7 @@ const AuthLoadingScreen: NavigationStackScreenComponent = (props) => {
 
   return (
     <View style={styles.main}>
-      <ActivityIndicator size="large" ></ActivityIndicator>
+      <ActivityIndicator size="large" />
     </View>
   );
 }

@@ -2,8 +2,9 @@ const Caching = require('../services/Caching')
 const CachingKey = require('../services/CachingKey')
 
 const getLoggedUser = async (email) => {
-  const logged = await Caching.hget(CachingKey.LOGGED_USERS_KEY, email)
-  return JSON.parse(logged)
+  const loggedString = await Caching.hget(CachingKey.LOGGED_USERS_KEY, email)
+  const logged = JSON.parse(loggedString)
+  return logged
 }
 
 const getLoggedUsers = async () => {
@@ -15,12 +16,18 @@ const getLoggedUsers = async () => {
   return loggeds
 }
 
-const createLoggedUser = async (email) => {
-  return await Caching.hset(CachingKey.LOGGED_USERS_KEY, email, JSON.stringify(new Date()))
+const createLoggedUser = async ({ email, token }) => {
+  const data = {
+    email, token, created_at: new Date(),
+  }
+  return await Caching.hset(CachingKey.LOGGED_USERS_KEY, email, JSON.stringify(data))
 }
 
-const updateLoggedUser = async (email) => {
-  return await Caching.hset(CachingKey.LOGGED_USERS_KEY, email, JSON.stringify(new Date()))
+const updateLoggedUser = async (email, token) => {
+  const data = {
+    email, token, created_at: new Date(),
+  }
+  return await Caching.hset(CachingKey.LOGGED_USERS_KEY, email, JSON.stringify(data))
 }
 
 const removeLoggedUser = (email) => {

@@ -7,7 +7,14 @@ router.post('/sign_up', (req, res) => {
     if (err) {
       res.status(err.status).json({errors: err.msg})
     } else {
-      res.json({msg: successData})
+      res.cookie(config.authCookieKey, {
+        email: successData._cookie.email,
+        token: successData._cookie.token
+      }, {
+        httpOnly: true,
+        maxAge: config.jwtExpiresIn,
+      })
+      res.json({user: successData.user})
     }
   })
 })

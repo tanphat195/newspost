@@ -1,27 +1,31 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 import REST from '../utils/api';
-import { UPDATE_USER } from '../reducers/userReducer'
+import { UPDATE_USER } from '../reducers/userReducer';
 
 export function* watchSignUpAsync() {
-  yield takeLatest('WATCH_SIGN_UP', workerSignUpAsync)
+  yield takeLatest('WATCH_SIGN_UP', workerSignUpAsync);
 }
 
 function* workerSignUpAsync(action) {
   try {
-    yield call(requestSignUp, action, action.callback);
+    const user = yield call(requestSignUp, action, action.callback);
+    yield put({
+      type: UPDATE_USER,
+      payload: user,
+    });
   } catch (error) {
     yield put({
       type: UPDATE_USER,
       payload: {}
-    })
+    });
   }
 }
 
 const requestSignUp = (action, callback = (err, user) => {}) => {
   return REST.post('auth/sign_up', action.payload)
     .then(res => {
-      callback(false, res.data.msg);
-      return res.data.msg;
+      callback(false, res.data.user);
+      return res.data.user;
     })
     .catch(err => {
       callback(true, err.response.data.errors);
@@ -66,7 +70,7 @@ export function* watchFetchUserAsync() {
 
 function* workerFetchUserAsync(action) {
   try {
-    const user = yield call(requestFetchUser)
+    const user = yield call(requestFetchUser);
     yield put({
       type: UPDATE_USER,
       payload: user,

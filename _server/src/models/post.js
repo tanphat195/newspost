@@ -2,29 +2,26 @@ const Caching = require('../services/Caching')
 const CachingKey = require('../services/CachingKey')
 
 const getPostById = async (post_id) => {
-  const postsString = await Caching.getLRange(CachingKey.POSTS_KEY, 0, -1)
-  const posts = postsString.map(item => JSON.parse(item))
-  return posts.find(item => item.id === post_id)
-}
-
-const getPostsRange = async (start, end) => {
-  const postsString = await Caching.getLRange(CachingKey.POSTS_KEY, start, end)
-  return postsString.map(item => JSON.parse(item))
+  const postsString = await Caching.hget(CachingKey.POSTS_KEY, post_id)
+  return JSON.parse(postsString)
 }
 
 const getPosts = async () => {
-  const postsString = await Caching.getLRange(CachingKey.POSTS_KEY, 0, -1)
-  return postsString.map(item => JSON.parse(item))
+  const postsString = await Caching.hgetall(CachingKey.POSTS_KEY)
+  const posts = Object.values(postsString).reduce((prev, value) => ([
+    ...prev,
+    JSON.parse(value),
+  ]), [])
+  return posts
 }
 
 const getPostsByUserEmail = async (email) => {
-  const postsString = await Caching.getLRange(CachingKey.POSTS_KEY, 0, -1)
-  const posts = postsString.map(item => JSON.parse(item))
+  const posts = await getPosts()
   return posts.filter(item => item.creator === email)
 }
 
 const createPost = async (post) => {
-  return Caching.pushRightList(CachingKey.POSTS_KEY, JSON.stringify({...post, created_at: new Date()}))
+  return Caching.hset(CachingKey.POSTS_KEY, post.id, JSON.stringify({...post, created_at: new Date()}))
 }
 
 const updatePost = async (post) => {
@@ -32,10 +29,15 @@ const updatePost = async (post) => {
   // return Caching.hset(CachingKey.POSTS_KEY, JSON.stringify({...get_post, ...post}))
 }
 
-const removePost = (post_id) => {
+const deletePost = (post_id) => {
   return Caching.hdel(CachingKey.POSTS_KEY, post_id)
 }
 
 module.exports = {
-  getPostById, getPostsRange, getPosts, getPostsByUserEmail, createPost, updatePost, removePost,
+  getPostById,
+  getPosts,
+  getPostsByUserEmail,
+  createPost,
+  updatePost,
+  deletePost,
 }

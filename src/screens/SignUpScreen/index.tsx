@@ -22,7 +22,7 @@ const SignUpScreen: NavigationStackScreenComponent = (props) => {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
-  )
+  );
 }
 
 interface FormProps {
@@ -39,7 +39,7 @@ const RenderForm: React.FC<FormProps> = (props) => {
           msg,
           [
             {text: 'OK', onPress: () => {
-              if (!error) props.navigation.navigate('Login');
+              if (!error) props.navigation.navigate('App');
             }},
           ],
           {cancelable: false},
@@ -71,6 +71,7 @@ const RenderForm: React.FC<FormProps> = (props) => {
             error={form['email'].error}
             value={form['email'].value}
             onChangeText={setFormKeys['email']}
+            keyboardType="email-address"
           />
           <Input
             secureTextEntry={true}
@@ -78,6 +79,7 @@ const RenderForm: React.FC<FormProps> = (props) => {
             error={form['password'].error}
             value={form['password'].value}
             onChangeText={setFormKeys['password']}
+            keyboardType={'web-search'}
           />
           <Input
             secureTextEntry={true}
@@ -85,6 +87,7 @@ const RenderForm: React.FC<FormProps> = (props) => {
             error={form['confirm_password'].error}
             value={form['confirm_password'].value}
             onChangeText={setFormKeys['confirm_password']}
+            keyboardType={'web-search'}
           />
           <Button onPress={onPress}>Register</Button>
         </>

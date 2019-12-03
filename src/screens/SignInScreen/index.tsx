@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, KeyboardAvoidingView, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, KeyboardAvoidingView, TouchableOpacity, Alert } from 'react-native';
 import { NavigationStackProp, NavigationStackScreenComponent } from 'react-navigation-stack';
 import styles from './styles';
 import Form, { } from '../../components/molecules/Form';
@@ -73,6 +73,7 @@ const RenderForm: React.FC<FormProps> = (props) => {
             error={form['email'].error}
             value={form['email'].value}
             onChangeText={setFormKeys['email']}
+            keyboardType="email-address"
           />
           <Input
             secureTextEntry={true}

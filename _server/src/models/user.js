@@ -8,9 +8,9 @@ const getUser = async (email) => {
 
 const getUsers = async () => {
   const usersString = await Caching.hgetall(CachingKey.USERS_KEY)
-  const users = Object.values(usersString || '').reduce((prev, key) => ([
+  const users = Object.values(usersString || '').reduce((prev, value) => ([
     ...prev,
-    JSON.parse(key),
+    JSON.parse(value),
   ]), [])
   return users
 }
