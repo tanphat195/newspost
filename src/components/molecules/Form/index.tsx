@@ -31,6 +31,7 @@ type validateType = isRequired | isEmail | isNumber | minLength | maxLength
 type InitialFormType = {
   [key:string]: {
     value: string,
+    error?: string,
     validate?: validateType[],
   }
 }

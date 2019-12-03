@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, RefreshControl } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { NavigationStackProp, NavigationStackScreenProps, NavigationStackScreenComponent } from 'react-navigation-stack';
 import PostCard from '../../components/molecules/PostCard';
-import Divider from '../../components/atoms/Divider';
 import REST from '../../utils/api';
 import styles from './styles';
 import { connect } from 'react-redux';
@@ -16,16 +15,21 @@ interface Props extends NavigationStackScreenProps {
 
 const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
   const [posts, setPosts] = useState([]);
+  const [isRefreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
-    REST.get(`users/${props.user.email}/posts`)
+    getPostsByEmail();
+  }, []);
+
+  const getPostsByEmail = async () => {
+    return REST.get(`users/${props.user.email}/posts`)
       .then(res => {
         setPosts(res.data.posts)
       });
-  }, []);
+  };
 
   const onEdit = (id) => {
-
+    props.navigation.navigate('PostAdd', { post: posts.find(item => item.id === id)})
   };
 
   const onDelete = (id) => {
@@ -37,19 +41,49 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
       })
   };
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    return REST.get(`users/${props.user.email}/posts`)
+    .then(res => {
+      setPosts(res.data.posts);
+      setRefreshing(false);
+    })
+    .catch(err => setRefreshing(false))
+  };
+
+  const renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 1,
+          width: '100%',
+          backgroundColor: 'rgba(0,0,0,0.05)'
+        }}
+      />
+    );
+  };
+
   return (
-    <ScrollView>
-      <View style={styles.main}>
-        {posts.map((post, index) => (
-          <View key={post.id}>
+    <View style={styles.main}>
+      <FlatList
+        data={posts}
+        renderItem={({item: post}) => (
+          <View style={{marginVertical: 15}}>
             <RenderRow id={post.id} onEdit={onEdit} onDelete={onDelete}>
               <PostCard post={post} navigation={props.navigation} />
             </RenderRow>
-            {index !== posts.length - 1 && <Divider />}
           </View>
-        ))}
-      </View>
-    </ScrollView>
+        )}
+        keyExtractor={item => item.id}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+          />
+        }
+        ItemSeparatorComponent={renderSeparator}
+      />
+    </View>
   );
 }
 
@@ -58,7 +92,7 @@ const RenderRow = ({ children, onEdit, onDelete, id }) => {
     {
       text: 'Edit',
       backgroundColor: '#1a5ef2',
-      onPress: onEdit,
+      onPress: () => onEdit(id),
     },
     {
       text: 'Delete',

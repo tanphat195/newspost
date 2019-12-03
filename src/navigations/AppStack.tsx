@@ -26,9 +26,10 @@ const BottomStack = createMaterialBottomTabNavigator(
         },
       }
     },
-    'Post Manage': {
+    PostManage: {
       screen: PostManageScreen,
       navigationOptions: {
+        tabBarLabel: 'Post Manage',
         tabBarIcon: ({ tintColor, focused }) => {
           return (
             <Ionicons
@@ -76,13 +77,17 @@ export default createStackNavigator({
   },
   PostAdd: {
     screen: PostAddScreen,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Add Post',
-      headerRight: () => (
-        <View>
-          <Button color='#41BAEE' onPress={() => navigation.navigate('PostAddDone')}>DONE</Button>
-        </View>
-      ),
-    }),
+    navigationOptions: ({ navigation }) => {
+      const params = navigation.state.params || {};
+      const post = params.post || {}
+      return {
+        title: post.id ? 'Edit Post' : 'Add Post',
+        headerRight: () => (
+          <View>
+            <Button color='#41BAEE' onPress={() => navigation.navigate('PostAddDone')}>DONE</Button>
+          </View>
+        ),
+      }
+    },
   }
 });

@@ -15,7 +15,15 @@ interface Props extends NavigationStackScreenProps {
   navigation: NavigationStackProp;
 }
 
+type Post = {
+  id: number,
+  title: string,
+  description: string,
+}
+
 const PostAddScreen: NavigationStackScreenComponent<Props> = (props) => {
+  const [post, setPost] = useState<Post>((
+    props.navigation.state.params && props.navigation.state.params.post) ? props.navigation.state.params.post : {});
 
   // const launchImageLibrary = () => {
   //   let options = {
@@ -47,36 +55,51 @@ const PostAddScreen: NavigationStackScreenComponent<Props> = (props) => {
   // };
 
   return (
-    <View style={styles.main}>
-      <View style={styles.title}>
-        <Input
-          placeholder="Input Title"
-          style={{
-            borderWidth: 0,
-            borderBottomWidth: 1,
-            borderRadius: 0,
-            height: 60,
-          }}
-        />
-      </View>
-
-      <View>
-        <Input
-          placeholder="Write SomeThing About This Description..."
-          multiline={true}
-          numberOfLines={8}
-          style={{
-            height: 240,
-            borderWidth: 0,
-            borderRadius: 0,
-          }}
-        />
-      </View>
-
-      <TouchableOpacity style={styles.photo} onPress={() => {}}>
-        <SimpleLineIcons size={48} color="rgba(0,0,0,0.4)" name='picture' />
-      </TouchableOpacity>
-    </View>
+    <Form
+      initialForm={{
+        title: { value: post.id ? post.title : '', validate:[{isRequired: true, message: 'Title is required!'}] },
+        description: {value: post.id ? post.description : '', validate: [{isRequired: true, message: 'Description is required!'}]}
+      }}
+    >
+      {(form, setFormKeys, onPress) => (
+        <View style={styles.main}>
+          <View style={styles.title}>
+            <Input
+              placeholder="Input Title"
+              style={{
+                borderWidth: 0,
+                borderBottomWidth: 1,
+                borderRadius: 0,
+                height: 60,
+              }}
+              value={form['title'].value}
+              error={form['title'].error}
+              onChangeText={setFormKeys['title']}
+            />
+          </View>
+    
+          <View>
+            <Input
+              placeholder="Write SomeThing About This Description..."
+              multiline={true}
+              numberOfLines={8}
+              style={{
+                height: 240,
+                borderWidth: 0,
+                borderRadius: 0,
+              }}
+              value={form['description'].value}
+              error={form['description'].error}
+              onChangeText={setFormKeys['description']}
+            />
+          </View>
+    
+          <TouchableOpacity style={styles.photo} onPress={() => {}}>
+            <SimpleLineIcons size={48} color="rgba(0,0,0,0.4)" name='picture' />
+          </TouchableOpacity>
+        </View>
+      )}
+    </Form>
   );
 }
 
