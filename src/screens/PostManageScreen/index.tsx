@@ -117,7 +117,10 @@ PostManageScreen.navigationOptions = ({ navigation }) => ({
     <View>
       <Button color='#41BAEE' onPress={() => navigation.navigate('PostAdd')}>+ Add</Button>
     </View>
-  )
+  ),
+  headerStyle: {
+    borderBottomWidth: 0,
+  }
 });
 
 const mapState = state => ({

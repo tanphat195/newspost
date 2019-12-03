@@ -70,6 +70,9 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
 
 PostDetailScreen.navigationOptions = (props) => ({
   title: 'Post detail',
+  headerStyle: {
+    borderBottomWidth: 0,
+  }
 });
 
 export default PostDetailScreen;

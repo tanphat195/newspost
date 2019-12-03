@@ -87,6 +87,9 @@ export default createStackNavigator({
             <Button color='#41BAEE' onPress={() => navigation.navigate('PostAddDone')}>DONE</Button>
           </View>
         ),
+        headerStyle: {
+          borderBottomWidth: 0,
+        }
       }
     },
   }

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import ImagePicker from 'react-native-image-picker';
 import {
@@ -19,6 +19,7 @@ type Post = {
   id: number,
   title: string,
   description: string,
+  photo: string,
 }
 
 const PostAddScreen: NavigationStackScreenComponent<Props> = (props) => {
@@ -55,51 +56,64 @@ const PostAddScreen: NavigationStackScreenComponent<Props> = (props) => {
   // };
 
   return (
-    <Form
-      initialForm={{
-        title: { value: post.id ? post.title : '', validate:[{isRequired: true, message: 'Title is required!'}] },
-        description: {value: post.id ? post.description : '', validate: [{isRequired: true, message: 'Description is required!'}]}
-      }}
-    >
-      {(form, setFormKeys, onPress) => (
-        <View style={styles.main}>
-          <View style={styles.title}>
-            <Input
-              placeholder="Input Title"
-              style={{
-                borderWidth: 0,
-                borderBottomWidth: 1,
-                borderRadius: 0,
-                height: 60,
-              }}
-              value={form['title'].value}
-              error={form['title'].error}
-              onChangeText={setFormKeys['title']}
-            />
-          </View>
-    
-          <View>
-            <Input
-              placeholder="Write SomeThing About This Description..."
-              multiline={true}
-              numberOfLines={8}
-              style={{
-                height: 240,
-                borderWidth: 0,
-                borderRadius: 0,
-              }}
-              value={form['description'].value}
-              error={form['description'].error}
-              onChangeText={setFormKeys['description']}
-            />
-          </View>
-    
-          <TouchableOpacity style={styles.photo} onPress={() => {}}>
-            <SimpleLineIcons size={48} color="rgba(0,0,0,0.4)" name='picture' />
-          </TouchableOpacity>
-        </View>
-      )}
-    </Form>
+    <View style={styles.main}>
+      <KeyboardAvoidingView style={{flex: 1}} behavior="padding" enabled>
+        <ScrollView style={{flex: 1}}>
+          <Form
+            initialForm={{
+              title: { value: post.id ? post.title : '', validate:[{isRequired: true, message: 'Title is required!'}] },
+              description: {value: post.id ? post.description : '', validate: [{isRequired: true, message: 'Description is required!'}]}
+            }}
+            onPressTrigger={() => {}}
+          >
+            {(form, setFormKeys, onPress) => (
+              <View style={styles.form}>
+                <View style={styles.title}>
+                  <Input
+                    placeholder="Input Title"
+                    style={{
+                      borderWidth: 0,
+                      borderBottomWidth: 1,
+                      borderRadius: 0,
+                      height: 60,
+                    }}
+                    value={form['title'].value}
+                    error={form['title'].error}
+                    onChangeText={setFormKeys['title']}
+                  />
+                </View>
+          
+                <View>
+                  <Input
+                    placeholder="Write SomeThing About This Description..."
+                    multiline={true}
+                    numberOfLines={8}
+                    style={{
+                      height: 240,
+                      borderWidth: 0,
+                      borderRadius: 0,
+                    }}
+                    value={form['description'].value}
+                    error={form['description'].error}
+                    onChangeText={setFormKeys['description']}
+                  />
+                </View>
+
+                <View style={styles.action}>
+                  <TouchableOpacity style={styles.photo} onPress={() => {}}>
+                    {post.id ? (
+                      <Image style={{width: '100%', height: '100%'}} source={{uri: post.photo}} />
+                    ) : (
+                      <SimpleLineIcons size={48} color="rgba(0,0,0,0.4)" name='picture' />
+                    )}
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+          </Form>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </View>
   );
 }
 
