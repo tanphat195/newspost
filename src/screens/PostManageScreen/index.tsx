@@ -7,6 +7,7 @@ import REST from '../../utils/api';
 import styles from './styles';
 import { connect } from 'react-redux';
 import { Button } from 'react-native-paper';
+import { primary, secondary } from '../../styles/color';
 import Swipeout from 'react-native-swipeout';
 
 interface Props extends NavigationStackScreenProps {
@@ -44,11 +45,11 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
   const onRefresh = () => {
     setRefreshing(true);
     return REST.get(`users/${props.user.email}/posts`)
-    .then(res => {
-      setPosts(res.data.posts);
-      setRefreshing(false);
-    })
-    .catch(err => setRefreshing(false))
+      .then(res => {
+        setPosts(res.data.posts);
+        setRefreshing(false);
+      })
+      .catch(err => setRefreshing(false))
   };
 
   const renderSeparator = () => {
@@ -91,12 +92,12 @@ const RenderRow = ({ children, onEdit, onDelete, id }) => {
   let swipeBtns = [
     {
       text: 'Edit',
-      backgroundColor: '#1a5ef2',
+      backgroundColor: secondary,
       onPress: () => onEdit(id),
     },
     {
       text: 'Delete',
-      backgroundColor: 'tomato',
+      backgroundColor: primary,
       onPress: () => onDelete(id),
     }
   ];
@@ -115,7 +116,7 @@ PostManageScreen.navigationOptions = ({ navigation }) => ({
   title: 'Post Manage',
   headerRight: () => (
     <View>
-      <Button color='#41BAEE' onPress={() => navigation.navigate('PostAdd')}>+ Add</Button>
+      <Button color={primary} onPress={() => navigation.navigate('PostAdd')}>+ Add</Button>
     </View>
   ),
   headerStyle: {

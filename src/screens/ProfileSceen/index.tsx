@@ -8,6 +8,7 @@ import {
 import { connect } from 'react-redux';
 import Button from '../../components/atoms/Button';
 import Avatar from '../../components/atoms/Avatar';
+import { primary } from '../../styles/color';
 import styles from './styles';
 
 interface Props extends NavigationStackScreenProps {
@@ -22,7 +23,7 @@ const ProfileSceen: NavigationStackScreenComponent<Props> = (props) => {
   };
 
   return (
-    <ScrollView style={{backgroundColor: '#41BAEE'}}>
+    <ScrollView style={{backgroundColor: primary}}>
       <View style={styles.banner} />
       <View style={styles.main}>
         <View style={styles.avatar}>
@@ -34,27 +35,25 @@ const ProfileSceen: NavigationStackScreenComponent<Props> = (props) => {
           <Button
             style={{
               borderRadius: 24,
-              borderWidth: 1,
-              borderColor: '#41BAEE',
               width: 150,
-              backgroundColor: '#fff',
             }}
+            type="default"
           >
-            <Text style={{color: '#41BAEE'}}>Edit</Text>
+            Edit
           </Button>
         </View>
 
         <Button
           style={{
             borderRadius: 24,
-            // borderWidth: 1,
-            // borderColor: '#41BAEE',
             width: 150,
-            // backgroundColor: '#fff',
             marginTop: 15
           }}
+          type="primary"
           onPress={handleLogout}
-        >Logout</Button>
+        >
+          Logout
+        </Button>
       </View>
     </ScrollView>
   );

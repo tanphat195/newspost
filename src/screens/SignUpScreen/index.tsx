@@ -89,7 +89,7 @@ const RenderForm: React.FC<FormProps> = (props) => {
             onChangeText={setFormKeys['confirm_password']}
             keyboardType={'web-search'}
           />
-          <Button onPress={onPress}>Register</Button>
+          <Button type="primary" onPress={onPress}>Register</Button>
         </>
       )}
     </Form>

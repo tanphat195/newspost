@@ -16,6 +16,10 @@ const createPost = post => {
   return Post.createPost(post)
 }
 
+const updatePost = post => {
+  return Post.updatePost(post)
+}
+
 const deletePost = (post_id) => {
   return Post.deletePost(post_id)
 }
@@ -25,5 +29,6 @@ module.exports = {
   getPosts,
   getPostsByUserEmail,
   createPost,
+  updatePost,
   deletePost,
 }

@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { primary } from '../../styles/color';
 
 export default StyleSheet.create({
   keyboard: {
@@ -29,7 +30,6 @@ export default StyleSheet.create({
   },
   registerText: {
     fontSize: 13,
-    color: '#41BAEE',
+    color: primary,
   },
-  
 });

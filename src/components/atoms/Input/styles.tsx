@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { primary } from '../../../styles/color';
 
 export default StyleSheet.create({
   container: {
@@ -16,7 +17,7 @@ export default StyleSheet.create({
     zIndex: 10,
   },
   focusBorder: {
-    borderColor: '#41BAEE',
+    borderColor: primary,
     // shadowOffset: {
     //   width: 0, height: 0
     // },

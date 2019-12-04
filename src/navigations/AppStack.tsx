@@ -1,4 +1,5 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
@@ -7,6 +8,8 @@ import ProfileSceen from '../screens/ProfileSceen';
 import PostManageScreen from '../screens/PostManageScreen';
 import PostAddScreen from '../screens/PostAddScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { primary } from '../styles/color';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { View } from 'react-native';
 import { Button } from 'react-native-paper';
 
@@ -77,20 +80,5 @@ export default createStackNavigator({
   },
   PostAdd: {
     screen: PostAddScreen,
-    navigationOptions: ({ navigation }) => {
-      const params = navigation.state.params || {};
-      const post = params.post || {}
-      return {
-        title: post.id ? 'Edit Post' : 'Add Post',
-        headerRight: () => (
-          <View>
-            <Button color='#41BAEE' onPress={() => navigation.navigate('PostAddDone')}>DONE</Button>
-          </View>
-        ),
-        headerStyle: {
-          borderBottomWidth: 0,
-        }
-      }
-    },
   }
 });

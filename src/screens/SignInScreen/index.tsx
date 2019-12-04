@@ -31,7 +31,6 @@ const SignInScreen: NavigationStackScreenComponent = (props) => {
     </KeyboardAvoidingView>
   )
 }
-
 interface FormProps {
   navigation: NavigationStackProp;
   login: Function
@@ -82,7 +81,7 @@ const RenderForm: React.FC<FormProps> = (props) => {
             value={form['password'].value}
             onChangeText={setFormKeys['password']}
           />
-          <Button onPress={onPress}>Login</Button>
+          <Button type="primary" onPress={onPress}>Login</Button>
         </>
       )}
     </Form>

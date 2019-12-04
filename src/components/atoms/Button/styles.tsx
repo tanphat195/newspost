@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
+import { primary } from '../../../styles/color';
 
 export default StyleSheet.create({
   main: {
     height: 48,
     borderRadius: 6,
-    backgroundColor: '#41BAEE',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -15,7 +15,6 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    color: '#FFFFFF',
     fontSize: 18,
   }
 });

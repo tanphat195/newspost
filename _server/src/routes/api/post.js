@@ -21,6 +21,12 @@ router.post('/', (req, res, next) => {
     .catch(errors => res.status(404).json({errors: 'Not found'}))
 })
 
+router.put('/', (req, res, next) => {
+  postAction.updatePost(req.body)
+    .then(result => res.json(result))
+    .catch(errors => res.status(404).json({errors}))
+})
+
 router.delete('/:id', (req, res, next) => {
   postAction.deletePost(req.params.id)
     .then(post => res.json(post))

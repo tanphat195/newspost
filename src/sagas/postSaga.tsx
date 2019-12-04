@@ -6,9 +6,11 @@ export function* watchGetPosts() {
   yield takeLatest('WATCH_GET_POSTS', workerGetPosts);
 }
 
-function* workerGetPosts() {
+function* workerGetPosts(action) {
   try {
     const posts = yield call(requestGetPosts);
+    if (action.callback) action.callback();
+    
     yield put({
       type: POSTS_HOME,
       payload: posts,

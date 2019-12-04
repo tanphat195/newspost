@@ -6,10 +6,6 @@ export default StyleSheet.create({
     height: '100%',
     flexDirection: 'column',
     position: 'relative',
-    paddingHorizontal: 6,
-  },
-  form: {
-    flex: 1,
   },
   title: {
   },

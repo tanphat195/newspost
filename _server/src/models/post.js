@@ -25,8 +25,12 @@ const createPost = async (post) => {
 }
 
 const updatePost = async (post) => {
-  // const get_post = await getPost(post.id);
-  // return Caching.hset(CachingKey.POSTS_KEY, JSON.stringify({...get_post, ...post}))
+  const get_post = await getPostById(post.id)
+  if (get_post) {
+    return Caching.hset(CachingKey.POSTS_KEY, post.id, JSON.stringify({...get_post, ...post}))
+  } else {
+    return Promise.reject('Post not exists')
+  }
 }
 
 const deletePost = (post_id) => {

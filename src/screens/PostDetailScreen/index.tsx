@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import {
   NavigationStackProp,
   NavigationStackScreenProps,
   NavigationStackScreenComponent
 } from 'react-navigation-stack';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { primary } from '../../styles/color';
 import moment from 'moment';
 import ImperativeScrollView, { ImperativeScrollViewHandles } from '../../components/atoms/ImperativeScrollView';
 import PostCard from '../../components/molecules/PostCard';
@@ -69,10 +71,20 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
 }
 
 PostDetailScreen.navigationOptions = (props) => ({
-  title: 'Post detail',
+  title: 'Post Detail',
   headerStyle: {
     borderBottomWidth: 0,
-  }
+  },
+  headerLeft: () => (
+    <TouchableOpacity
+      style={{ paddingHorizontal: 15 }}
+      onPress={() => {
+        props.navigation.goBack();
+      }}
+    >
+      <FontAwesome5 name='long-arrow-alt-left' size={24} color={primary} />
+    </TouchableOpacity>
+  ),
 });
 
 export default PostDetailScreen;
