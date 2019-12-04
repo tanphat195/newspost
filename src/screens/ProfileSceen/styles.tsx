@@ -22,6 +22,15 @@ export default StyleSheet.create({
     marginTop: -75,
     marginBottom: 20,
   },
+  infomation: {
+    width: '100%',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  form: {
+    width: '100%',
+    flexDirection: 'column',
+  },
   full_name: {
     fontSize: 24,
     fontWeight: '500',
@@ -31,5 +40,14 @@ export default StyleSheet.create({
     fontSize: 18,
     color: 'rgba(0,0,0,0.4)',
     marginVertical: 12,
+  },
+  formWaraper: {
+    paddingHorizontal: 20,
+    width: '100%',
+    flexDirection: 'column',
+  },
+  action: {
+    flexDirection: 'row',
+    marginTop: 24,
   },
 });

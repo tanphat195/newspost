@@ -3,8 +3,9 @@ import { View, Text, TextInput, TextInputProps } from 'react-native';
 import styles from './styles';
 
 interface Props extends TextInputProps {
-  type?: string,
-  error?: string,
+  type?: string;
+  error?: string;
+  label?: string;
 }
 
 const Input: React.FC<Props> = (props) => {
@@ -20,6 +21,7 @@ const Input: React.FC<Props> = (props) => {
 
   return (
     <View style={styles.container}>
+      {props.label && <Text style={styles.labelText}>{props.label}</Text>}
       <TextInput
         {...props}
         style={[

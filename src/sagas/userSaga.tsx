@@ -119,3 +119,31 @@ function* workerSignOutAsync(action) {
 const requestSignOut = () => {
   return REST.get('auth/sign_out');
 };
+
+export function* watchUpdateProfile() {
+  yield takeLatest('WATCH_UPDATE_PROFILE', workerUpdateProfile);
+}
+
+function* workerUpdateProfile(action) {
+  try {
+    const user = yield call(requestUpdateProfile, action);
+    if (action.callback) {
+      action.callback(user);
+    }
+    yield put({
+      type: UPDATE_USER,
+      payload: user,
+    });
+  } catch (err) {
+    yield put({
+      type: UPDATE_USER,
+      payload: {},
+    });
+  }
+}
+
+const requestUpdateProfile = (action) => {
+  return REST.put('auth/update_profile', action.payload)
+    .then(res => res.data.user)
+    .catch(() => ({}));
+};

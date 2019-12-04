@@ -11,6 +11,7 @@ import moment from 'moment';
 import ImperativeScrollView, { ImperativeScrollViewHandles } from '../../components/atoms/ImperativeScrollView';
 import PostCard from '../../components/molecules/PostCard';
 import Divider from '../../components/atoms/Divider';
+import GoBackArrow from '../../components/atoms/GoBackArrow';
 import REST from '../../utils/api';
 import styles from './styles';
 
@@ -76,14 +77,7 @@ PostDetailScreen.navigationOptions = (props) => ({
     borderBottomWidth: 0,
   },
   headerLeft: () => (
-    <TouchableOpacity
-      style={{ paddingHorizontal: 15 }}
-      onPress={() => {
-        props.navigation.goBack();
-      }}
-    >
-      <FontAwesome5 name='long-arrow-alt-left' size={24} color={primary} />
-    </TouchableOpacity>
+    <GoBackArrow onPress={() => props.navigation.goBack()} />
   ),
 });
 

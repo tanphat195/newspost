@@ -22,7 +22,7 @@ export default StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 12,
+    marginTop: 16,
   },
   dontHaveAccountText: {
     fontSize: 13,

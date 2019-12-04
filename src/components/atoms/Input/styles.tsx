@@ -7,7 +7,7 @@ export default StyleSheet.create({
     paddingBottom: 24,
   },
   main: {
-    height: 48,
+    height: 42,
     paddingLeft: 9,
     borderWidth: 1.5,
     borderRadius: 6,
@@ -40,5 +40,10 @@ export default StyleSheet.create({
     marginLeft: 3,
     bottom: 0,
     marginBottom: 6,
-  }
+  },
+  labelText: {
+    marginLeft: 4,
+    marginBottom: 2,
+    color: 'rgba(0,0,0,0.4)',
+  },
 });

@@ -8,7 +8,12 @@ const getUserByEmail = (email) => {
   return User.getUser(email)
 }
 
+const updateProfile = (user) => {
+  return User.updateUser(user);
+}
+
 module.exports = {
   getUsers,
   getUserByEmail,
+  updateProfile,
 }

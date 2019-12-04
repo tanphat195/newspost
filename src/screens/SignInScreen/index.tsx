@@ -37,8 +37,8 @@ interface FormProps {
 }
 
 const RenderForm: React.FC<FormProps> = (props) => {
-  const handleLogin = (error, values) => {
-    if (!error) {
+  const handleLogin = (err, values) => {
+    if (!err) {
       props.login(values, (error, msg) => {
         if (error) {
           Alert.alert(
@@ -68,20 +68,20 @@ const RenderForm: React.FC<FormProps> = (props) => {
       {(form, setFormKeys, onPress) => (
         <>
           <Input
-            placeholder="Email"
+            placeholder='email'
             error={form['email'].error}
             value={form['email'].value}
             onChangeText={setFormKeys['email']}
-            keyboardType="email-address"
+            keyboardType='email-address'
           />
           <Input
             secureTextEntry={true}
-            placeholder="Password"
+            placeholder='Password'
             error={form['password'].error}
             value={form['password'].value}
             onChangeText={setFormKeys['password']}
           />
-          <Button type="primary" onPress={onPress}>Login</Button>
+          <Button type='primary' onPress={onPress}>Login</Button>
         </>
       )}
     </Form>

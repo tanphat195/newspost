@@ -5,6 +5,7 @@ import { NavigationStackScreenComponent, NavigationStackProp } from 'react-navig
 import Form from '../../components/molecules/Form';
 import Input from '../../components/atoms/Input';
 import Button from '../../components/atoms/Button';
+import GoBackArrow from '../../components/atoms/GoBackArrow';
 import styles from './styles';
 
 const SignUpScreen: NavigationStackScreenComponent = (props) => {
@@ -96,8 +97,11 @@ const RenderForm: React.FC<FormProps> = (props) => {
   )
 }
 
-SignUpScreen.navigationOptions = () => ({
+SignUpScreen.navigationOptions = ({ navigation }) => ({
   title: "Register",
+  headerLeft: () => (
+    <GoBackArrow onPress={() => navigation.goBack()} />
+  ),
 });
 
 const mapDispatch = dispatch => ({

@@ -3,11 +3,12 @@ import { primary } from '../../../styles/color';
 
 export default StyleSheet.create({
   main: {
-    height: 48,
+    height: 42,
     borderRadius: 6,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 12,
   },
   border: {
     flexDirection: 'row',

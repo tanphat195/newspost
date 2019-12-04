@@ -9,6 +9,7 @@ import {
 } from 'react-navigation-stack';
 import Form from '../../components/molecules/Form';
 import Input from '../../components/atoms/Input';
+import GoBackArrow from '../../components/atoms/GoBackArrow';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Button } from 'react-native-paper';
 import { primary } from '../../styles/color';
@@ -155,14 +156,7 @@ PostAddScreen.navigationOptions = ({ navigation }) => {
   return {
     title: post.id ? 'Edit Post' : 'Add Post',
     headerLeft: () => (
-      <TouchableOpacity
-        style={{ paddingHorizontal: 15 }}
-        onPress={() => {
-          navigation.goBack();
-        }}
-      >
-        <FontAwesome5 name='long-arrow-alt-left' size={24} color={primary} />
-      </TouchableOpacity>
+      <GoBackArrow onPress={() => navigation.goBack()} />
     ),
     headerRight: () => (
       <View>

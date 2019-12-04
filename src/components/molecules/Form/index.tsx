@@ -30,7 +30,7 @@ type validateType = isRequired | isEmail | isNumber | minLength | maxLength
 
 type InitialFormType = {
   [key:string]: {
-    value: string,
+    value: string | boolean,
     error?: string,
     validate?: validateType[],
   }
@@ -56,7 +56,7 @@ const Form = (props: Props) => {
     setForm(newForm)
   };
 
-  const setFormKeys = Object.keys(props.initialForm).reduce(
+  const setFormKeys = Object.keys(form).reduce(
     (prev, key) => ({
       ...prev,
       [key]: updateFormKey.bind(this, key)

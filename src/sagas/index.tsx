@@ -1,5 +1,5 @@
 import { all, fork } from 'redux-saga/effects';
-import { watchSignUpAsync, watchSignInAsync, watchFetchUserAsync, watchSignOutAsync } from './userSaga';
+import { watchSignUpAsync, watchSignInAsync, watchFetchUserAsync, watchSignOutAsync, watchUpdateProfile } from './userSaga';
 import { watchGetPosts } from './postSaga';
 
 export default function* () {
@@ -8,6 +8,7 @@ export default function* () {
     fork(watchSignInAsync),
     fork(watchFetchUserAsync),
     fork(watchSignOutAsync),
+    fork(watchUpdateProfile),
     fork(watchGetPosts),
   ]);
 };

@@ -34,6 +34,8 @@ const signUp = async (body, callback) => {
       hash,
       salt,
       full_name,
+      gender: 'male',
+      birthday: '',
       avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySUvnmtdzOdplk95Fa5ziU0jSCJ6QrrXdTVWRXexIyMNEdflI',
     }
 
@@ -198,6 +200,19 @@ const fetch = async (authCookie, callback) => {
   }
 }
 
+const authenticate = (req, callback) => {
+  const authCookie = (req.body.cookies && req.body.cookies[config.authCookieKey])
+    ? req.body.cookies[config.authCookieKey] : req.cookies[config.authCookieKey]
+
+  fetch(authCookie, (err, successData) => {
+    if (err) {
+      callback(true)
+    } else {
+      callback(false, successData)
+    }
+  })
+}
+
 module.exports = {
-  signUp, signIn, signOut, fetch,
+  signUp, signIn, signOut, fetch, authenticate,
 }
