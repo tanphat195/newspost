@@ -2,9 +2,10 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   main: {
-    flex: 1,
+    flexDirection: 'row',
+    marginRight: 12,
   },
-  list: {
-    padding: 15
+  button: {
+    padding: 8,
   }
 });

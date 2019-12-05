@@ -52,24 +52,12 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
       .catch(err => setRefreshing(false))
   };
 
-  const renderSeparator = () => {
-    return (
-      <View
-        style={{
-          height: 1,
-          width: '100%',
-          backgroundColor: 'rgba(0,0,0,0.05)'
-        }}
-      />
-    );
-  };
-
   return (
     <View style={styles.main}>
       <FlatList
         data={posts}
         renderItem={({item: post}) => (
-          <View style={{marginVertical: 15}}>
+          <View style={styles.list}>
             <RenderRow id={post.id} onEdit={onEdit} onDelete={onDelete}>
               <PostCard post={post} navigation={props.navigation} />
             </RenderRow>
@@ -111,6 +99,18 @@ const RenderRow = ({ children, onEdit, onDelete, id }) => {
     </Swipeout>
   );
 }
+
+const renderSeparator = () => {
+  return (
+    <View
+      style={{
+        height: 1,
+        width: '100%',
+        backgroundColor: 'rgba(0,0,0,0.05)'
+      }}
+    />
+  );
+};
 
 PostManageScreen.navigationOptions = ({ navigation }) => ({
   title: 'Post Manage',

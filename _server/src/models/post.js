@@ -8,7 +8,7 @@ const getPostById = async (post_id) => {
 
 const getPosts = async () => {
   const postsString = await Caching.hgetall(CachingKey.POSTS_KEY)
-  const posts = Object.values(postsString).reduce((prev, value) => ([
+  const posts = Object.values(postsString || '').reduce((prev, value) => ([
     ...prev,
     JSON.parse(value),
   ]), [])
@@ -20,8 +20,23 @@ const getPostsByUserEmail = async (email) => {
   return posts.filter(item => item.creator === email)
 }
 
+const getsetNextId = async () => {
+  const getCurrentIdString = await Caching.hget(CachingKey.COUNTER_KEY, 'posts')
+  const currentId = parseInt(JSON.parse(getCurrentIdString || 0))
+  await Caching.hset(CachingKey.COUNTER_KEY, 'posts', JSON.stringify(currentId + 1))
+  return currentId + 1
+}
+
 const createPost = async (post) => {
-  return Caching.hset(CachingKey.POSTS_KEY, post.id, JSON.stringify({...post, created_at: new Date()}))
+  const id = await getsetNextId()
+  const finalPost = {
+    ...post,
+    id,
+    comments: [],
+    favorited: [],
+    created_at: new Date(),
+  }
+  return Caching.hset(CachingKey.POSTS_KEY, id, JSON.stringify(finalPost))
 }
 
 const updatePost = async (post) => {

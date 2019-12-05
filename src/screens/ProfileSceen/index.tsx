@@ -12,6 +12,7 @@ import Input from '../../components/atoms/Input';
 import Switch from '../../components/atoms/Switch';
 import Avatar from '../../components/atoms/Avatar';
 import { primary } from '../../styles/color';
+import { LinearGradient } from 'expo-linear-gradient';
 import styles from './styles';
 
 interface Props extends NavigationStackScreenProps {
@@ -26,29 +27,36 @@ const ProfileSceen: NavigationStackScreenComponent<Props> = (props) => {
   };
 
   return (
-    <ScrollView style={{backgroundColor: primary}}>
-      <View style={styles.banner} />
-      <View style={styles.main}>
-        <View style={styles.avatar}>
-          <Avatar border={{width: 6, color: '#FFF'}} source={{uri: props.user.avatar}} size={150} />
-        </View>
+    <LinearGradient
+      style={styles.main}
+      colors={[primary, '#FFF']}
+      start={{x: 0, y: 0}}
+      end={{x:0.5, y: 0.5}}
+    >
+      <ScrollView>
+        <View style={styles.banner} />
+        <View style={styles.content}>
+          <View style={styles.avatar}>
+            <Avatar border={{width: 6, color: '#FFF'}} source={{uri: props.user.avatar}} size={150} />
+          </View>
 
-        {enableEdit ? (
-          <RenderForm
-            user={props.user}
-            updateProfile={props.updateProfile}
-            setEnableEdit={setEnableEdit}
-          />
-        ) : (
-          <RenderInfo
-            navigation={props.navigation}
-            logout={props.logout}
-            user={props.user}
-            onEdit={onEdit}
-          />
-        )}
-      </View>
-    </ScrollView>
+          {enableEdit ? (
+            <RenderForm
+              user={props.user}
+              updateProfile={props.updateProfile}
+              setEnableEdit={setEnableEdit}
+            />
+          ) : (
+            <RenderInfo
+              navigation={props.navigation}
+              logout={props.logout}
+              user={props.user}
+              onEdit={onEdit}
+            />
+          )}
+        </View>
+      </ScrollView>
+    </LinearGradient>
   );
 }
 
@@ -118,7 +126,7 @@ const RenderForm: React.FC<FormProps> = ({ user, updateProfile, setEnableEdit })
         if (user.email) {
           setEnableEdit(false);
         }
-      });
+      })
     }
   };
 
@@ -131,19 +139,24 @@ const RenderForm: React.FC<FormProps> = ({ user, updateProfile, setEnableEdit })
       <Form
         initialForm={{
           full_name: {value: user.full_name ? user.full_name : '', validate: [{isRequired: true, message: 'Full name is required!'}]},
-          gender: {value: user.gender === 'male' }
+          gender: {value: user.gender === 'male' },
+          phone_number: {value: user.phone_number ? user.phone_number : ''},
         }}
         onPressTrigger={onUpdate}
       >
         {(form, setFormKeys, onPress) => (
           <View style={styles.formWaraper}>
             <Input
-              style={{
-              }}
               error={form['full_name'].error}
               value={form['full_name'].value}
               onChangeText={setFormKeys['full_name']}
               label={'Full Name:'}
+            />
+            <Input
+              error={form['phone_number'].error}
+              value={form['phone_number'].value}
+              onChangeText={setFormKeys['phone_number']}
+              label={'Phone Number:'}
             />
             <Switch
               label={'Gender:'}

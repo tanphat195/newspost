@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import {
   NavigationStackProp,
   NavigationStackScreenProps,
   NavigationStackScreenComponent
 } from 'react-navigation-stack';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { primary } from '../../styles/color';
 import moment from 'moment';
 import ImperativeScrollView, { ImperativeScrollViewHandles } from '../../components/atoms/ImperativeScrollView';
 import PostCard from '../../components/molecules/PostCard';
 import Divider from '../../components/atoms/Divider';
+import Button from '../../components/atoms/Button';
 import GoBackArrow from '../../components/atoms/GoBackArrow';
 import REST from '../../utils/api';
 import styles from './styles';
+import MapView from 'react-native-maps';
 
 interface Post {
   id: string,
@@ -55,6 +55,15 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
           <Text style={styles.creator}>{post.creator}</Text>
           <Text style={styles.created_at}>{moment(post.created_at).fromNow()}</Text>
           <Text style={styles.description}>{post.description}</Text>
+          <Button
+            style={{marginTop: 20, width: 150, borderRadius: 9}}
+            type='primary'
+          >
+            Add to Cart
+          </Button>
+        </View>
+        <View style={styles.mapsWrapper}>
+          <RenderMap />
         </View>
 
         <View style={styles.relatedPosts}>
@@ -70,6 +79,22 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
     </ImperativeScrollView>
   );
 }
+
+const RenderMap = () => {
+  const [region, setRegion] = useState({
+    latitude: 37.78825,
+    longitude: -122.4324,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  });
+
+  return (
+    <MapView
+      style={styles.maps}
+      region={region}
+    />
+  );
+};
 
 PostDetailScreen.navigationOptions = (props) => ({
   title: 'Post Detail',

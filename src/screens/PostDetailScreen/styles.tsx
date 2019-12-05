@@ -47,4 +47,12 @@ export default StyleSheet.create({
   wrap: {
     flexDirection: 'column',
   },
+  mapsWrapper: {
+    height: 240,
+    paddingBottom: 20,
+  },
+  maps: {
+    width: '100%',
+    height: '100%',
+  }
 });
