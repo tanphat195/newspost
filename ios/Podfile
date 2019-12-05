@@ -34,4 +34,10 @@ target 'newspost' do
 
   pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
 
+  pod 'react-native-maps', :path => '../node_modules/react-native-maps'
+
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 end
