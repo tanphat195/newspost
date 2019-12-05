@@ -2,21 +2,32 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import HomeScreen from '../screens/HomeScreen';
+import EntertainmentScreen from '../screens/EntertainmentScreen';
 import PostDetailScreen from '../screens/PostDetailScreen';
 import ProfileSceen from '../screens/ProfileSceen';
 import PostManageScreen from '../screens/PostManageScreen';
 import PostAddScreen from '../screens/PostAddScreen';
+import NotificationScreen from '../screens/NotificationScreen';
+import ShoppingCartScreen from '../screens/ShoppingCartScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { primary } from '../styles/color';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { View } from 'react-native';
 import { Button } from 'react-native-paper';
 
+const HomeDrawer = createDrawerNavigator(
+  {
+    Home: HomeScreen,
+    Entertainment: EntertainmentScreen,
+  }
+);
+
 const BottomStack = createMaterialBottomTabNavigator(
   {
     Home: {
-      screen: HomeScreen,
+      screen: HomeDrawer,
       navigationOptions: {
         tabBarIcon: ({ tintColor, focused }) => {
           return (
@@ -80,5 +91,7 @@ export default createStackNavigator({
   },
   PostAdd: {
     screen: PostAddScreen,
-  }
+  },
+  Notification: NotificationScreen,
+  ShoppingCart: ShoppingCartScreen,
 });

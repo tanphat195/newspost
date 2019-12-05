@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
   main: {
     flexDirection: 'column',
-    padding: 15,
+    paddingHorizontal: 15,
   },
   loading: {
     flex: 1,
