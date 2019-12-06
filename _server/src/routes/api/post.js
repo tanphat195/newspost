@@ -5,9 +5,7 @@ const Axios = require('axios')
 
 router.get('/', (req, res, next) => {
   postAction.getPosts(req.query)
-    .then(data => {
-      return res.json(data)
-    })
+    .then(data => res.json(data))
     .catch(next)
 })
 
