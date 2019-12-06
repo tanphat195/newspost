@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { View, ScrollView, FlatList, RefreshControl, ActivityIndicator } from 'react-native';
+=======
+import { View, ScrollView, FlatList, RefreshControl } from 'react-native';
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 import { createStackNavigator } from 'react-navigation-stack';
 import { NavigationStackProp, NavigationStackScreenProps, NavigationStackScreenComponent } from 'react-navigation-stack';
 import PostCard from '../../components/molecules/PostCard';
@@ -56,6 +60,7 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
   };
 
   return (
+<<<<<<< HEAD
     <>
       {loading ? (
         <View style={styles.loading}>
@@ -75,6 +80,19 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
         </ScrollView>
       )}
     </>
+=======
+    <ScrollView>
+      <View style={styles.main}>
+        {posts.map(post => (
+          <View key={post.id} style={styles.list}>
+            <RenderRow id={post.id} onEdit={onEdit} onDelete={onDelete}>
+              <PostCard post={post} navigation={props.navigation} />
+            </RenderRow>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
   );
 }
 

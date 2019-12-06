@@ -3,10 +3,13 @@ import { View, Text, FlatList, RefreshControl, Image } from 'react-native';
 import { NavigationStackProp, NavigationStackScreenProps, NavigationStackScreenComponent } from 'react-navigation-stack';
 import styles from './styles';
 import GoBackArrow from '../../components/atoms/GoBackArrow';
+<<<<<<< HEAD
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { connect } from 'react-redux';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+=======
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 
 interface Props extends NavigationStackScreenProps {
   navigation: NavigationStackProp;
@@ -36,6 +39,7 @@ const ShoppingCartScreen: NavigationStackScreenComponent<Props> = (props) => {
     </View>
   );
 };
+<<<<<<< HEAD
 
 type Cart = {
   id: number,
@@ -79,11 +83,15 @@ const renderSeparator = () => {
   );
 };
 
+=======
+
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 ShoppingCartScreen.navigationOptions = ({ navigation }) => ({
   title: 'Shopping Cart',
   headerLeft: () => (
     <GoBackArrow onPress={() => navigation.goBack()} />
   ),
+<<<<<<< HEAD
   headerStyle: {
     borderBottomColor: 'rgba(0,0,0,0.1)',
   }
@@ -98,6 +106,8 @@ const mapDispath = dispatch => ({
     type: 'WATCH_REMOVE_CART',
     payload: id,
   }),
+=======
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 });
 
 export default connect(mapState, mapDispath)(ShoppingCartScreen);

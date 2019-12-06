@@ -15,7 +15,10 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import REST from '../../utils/api';
 import styles from './styles';
 import MapView, { Marker } from 'react-native-maps';
+<<<<<<< HEAD
 import { connect } from 'react-redux';
+=======
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 
 type Location = {
   lat: number,
@@ -57,11 +60,15 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
   }, []);
 
   const handleAddToCart = () => {
+<<<<<<< HEAD
     props.addCart(post);
   };
 
   const handleRemoveCart = () => {
     props.removeCart(post.id);
+=======
+
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
   };
 
   return (
@@ -73,6 +80,7 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
           <Text style={styles.creator}>{post.creator}</Text>
           <Text style={styles.created_at}>{moment(post.created_at).fromNow()}</Text>
           <Text style={styles.description}>{post.description}</Text>
+<<<<<<< HEAD
 
           {props.carts.map(item => item.id).includes(post.id) ? (
             <Button
@@ -91,6 +99,15 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
               Add to Cart
             </Button>
           )}
+=======
+          <Button
+            style={{marginVertical: 20}}
+            type='primary'
+            onPress={handleAddToCart}
+          >
+            Add to Cart
+          </Button>
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
         </View>
 
         <View style={styles.addressWrapper}>

@@ -64,8 +64,13 @@ const HomeScreen: NavigationStackScreenComponent = (props) => {
     <>
       {props.posts_home.length > 0 ? (
         <FlatList
+<<<<<<< HEAD
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0}
+=======
+          onEndReached={(e) => console.log(e)}
+          onEndReachedThreshold={0.4}
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
           data={[(
             <View style={styles.main}>
               <TopPost navigation={props.navigation} post={props.posts_home[0] || {}} />
@@ -81,7 +86,11 @@ const HomeScreen: NavigationStackScreenComponent = (props) => {
             />
           }
           ListFooterComponent={() => (
+<<<<<<< HEAD
             loading ? <ActivityIndicator /> : null
+=======
+            <ActivityIndicator size='large' />
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
           )}
         />
       ) : (
