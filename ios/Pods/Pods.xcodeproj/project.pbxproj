@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -9451,6 +9452,8 @@
 	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }
 =======
+=======
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 // !$*UTF8*$!
 {
 	archiveVersion = 1;
@@ -18725,4 +18728,7 @@
 	};
 	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }
+<<<<<<< HEAD
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
+=======
 >>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031

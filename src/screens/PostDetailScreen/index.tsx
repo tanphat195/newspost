@@ -16,7 +16,10 @@ import REST from '../../utils/api';
 import styles from './styles';
 import MapView, { Marker } from 'react-native-maps';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { connect } from 'react-redux';
+=======
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 =======
 >>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 
@@ -61,11 +64,15 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
 
   const handleAddToCart = () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
     props.addCart(post);
   };
 
   const handleRemoveCart = () => {
     props.removeCart(post.id);
+=======
+
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 =======
 
 >>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031

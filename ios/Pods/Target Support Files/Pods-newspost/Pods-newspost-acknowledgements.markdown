@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Acknowledgements
 This application makes use of the following third party libraries:
 
@@ -391,6 +392,8 @@ SOFTWARE.
 ## boost-for-react-native
 
 =======
+=======
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 # Acknowledgements
 This application makes use of the following third party libraries:
 
@@ -758,6 +761,9 @@ SOFTWARE.
 
 ## boost-for-react-native
 
+<<<<<<< HEAD
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
+=======
 >>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 Boost Software License - Version 1.0 - August 17th, 2003
 

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { View, ScrollView, FlatList, RefreshControl, ActivityIndicator } from 'react-native';
+=======
+import { View, ScrollView, FlatList, RefreshControl } from 'react-native';
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 =======
 import { View, ScrollView, FlatList, RefreshControl } from 'react-native';
 >>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
@@ -61,6 +65,7 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
 
   return (
 <<<<<<< HEAD
+<<<<<<< HEAD
     <>
       {loading ? (
         <View style={styles.loading}>
@@ -81,6 +86,8 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
       )}
     </>
 =======
+=======
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
     <ScrollView>
       <View style={styles.main}>
         {posts.map(post => (
@@ -92,6 +99,9 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
         ))}
       </View>
     </ScrollView>
+<<<<<<< HEAD
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
+=======
 >>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
   );
 }

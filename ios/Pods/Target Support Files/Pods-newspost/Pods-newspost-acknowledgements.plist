@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -456,6 +457,8 @@ SOFTWARE.
 		<dict>
 			<key>FooterText</key>
 =======
+=======
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -882,6 +885,9 @@ SOFTWARE.
 		</dict>
 		<dict>
 			<key>FooterText</key>
+<<<<<<< HEAD
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
+=======
 >>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 			<string>Boost Software License - Version 1.0 - August 17th, 2003
 

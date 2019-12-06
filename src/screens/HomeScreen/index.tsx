@@ -65,8 +65,13 @@ const HomeScreen: NavigationStackScreenComponent = (props) => {
       {props.posts_home.length > 0 ? (
         <FlatList
 <<<<<<< HEAD
+<<<<<<< HEAD
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0}
+=======
+          onEndReached={(e) => console.log(e)}
+          onEndReachedThreshold={0.4}
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 =======
           onEndReached={(e) => console.log(e)}
           onEndReachedThreshold={0.4}
@@ -87,7 +92,11 @@ const HomeScreen: NavigationStackScreenComponent = (props) => {
           }
           ListFooterComponent={() => (
 <<<<<<< HEAD
+<<<<<<< HEAD
             loading ? <ActivityIndicator /> : null
+=======
+            <ActivityIndicator size='large' />
+>>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
 =======
             <ActivityIndicator size='large' />
 >>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
