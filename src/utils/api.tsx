@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const REST = axios.create({
-  baseURL: 'http://172.16.10.148:3456/api',
+  baseURL: 'http://192.168.1.231:3456/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
