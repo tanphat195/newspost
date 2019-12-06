@@ -12,22 +12,60 @@ import HeaderRightCartNotification from '../../components/molecules/HeaderRightC
 
 const HomeScreen: NavigationStackScreenComponent = (props) => {
   const [isRefreshing, setRefreshing] = useState(false);
+  const [current_page, setCurrentPage] = useState(1);
+  const [per_page, setPerPage] = useState(5);
+  const [loading, setLoading] = useState(false);
+  const [allowLoadMore, setAllowLoadMore] = useState(false);
 
   useEffect(() => {
-    props.getPosts();
+    props.getPosts({ page: current_page, per_page }, (data) => {
+      if (current_page > data.total_pages) {
+        setAllowLoadMore(false);
+      } else {
+        setTimeout(() => {
+          setAllowLoadMore(true);
+        }, 500);
+      }
+    });
+    props.getCarts();
   }, []);
 
   const onRefresh = () => {
+    const new_current_page = 1
     setRefreshing(true);
-    props.getPosts(() => {
+    setCurrentPage(new_current_page);
+    props.getPosts({ page: new_current_page, per_page }, (data) => {
       setRefreshing(false);
+      if (new_current_page > data.total_pages) {
+        setAllowLoadMore(false);
+      } else {
+        setAllowLoadMore(true);
+      }
     });
+  };
+
+  const handleLoadMore = e => {
+    if (!loading && allowLoadMore) {
+      setLoading(true);
+      const new_current_page = current_page + 1;
+      setCurrentPage(new_current_page);
+      props.loadMorePosts({ page: new_current_page, per_page }, (data) => {
+        setLoading(false);
+        if (new_current_page > data.total_pages) {
+          setAllowLoadMore(false);
+        } else {
+          setAllowLoadMore(true);
+        }
+      });
+    }
   };
 
   return (
     <>
       {props.posts_home.length > 0 ? (
         <FlatList
+          onEndReached={handleLoadMore}
+          onEndReachedThreshold={0}
           data={[(
             <View style={styles.main}>
               <TopPost navigation={props.navigation} post={props.posts_home[0] || {}} />
@@ -42,6 +80,9 @@ const HomeScreen: NavigationStackScreenComponent = (props) => {
               onRefresh={onRefresh}
             />
           }
+          ListFooterComponent={() => (
+            loading ? <ActivityIndicator /> : null
+          )}
         />
       ) : (
         <View style={styles.loading}>
@@ -71,9 +112,18 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-  getPosts: callback => dispatch({
+  getPosts: ({page, per_page}, callback) => dispatch({
     type: 'WATCH_GET_POSTS',
+    payload: {page, per_page},
     callback,
+  }),
+  loadMorePosts: ({page, per_page}, callback) => dispatch({
+    type: 'WATCH_LOAD_MORE_POSTS',
+    payload: {page, per_page},
+    callback,
+  }),
+  getCarts: () => dispatch({
+    type: 'WATCH_GET_CARTS',
   }),
 });
 

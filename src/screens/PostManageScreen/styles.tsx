@@ -6,5 +6,10 @@ export default StyleSheet.create({
   },
   list: {
     padding: 15
-  }
+  },
+  loading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

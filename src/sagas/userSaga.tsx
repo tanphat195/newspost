@@ -33,6 +33,8 @@ const requestSignUp = (action, callback = (err, user) => {}) => {
     });
 }
 
+///////////////////////////////////////////////////////
+
 export function* watchSignInAsync() {
   yield takeLatest('WATCH_SIGN_IN', workerSignInAsync);
 }
@@ -68,6 +70,8 @@ export function* watchFetchUserAsync() {
   yield takeLatest('WATCH_FETCH_USER', workerFetchUserAsync);
 }
 
+///////////////////////////////////////////////////////
+
 function* workerFetchUserAsync(action) {
   try {
     const user = yield call(requestFetchUser);
@@ -94,6 +98,8 @@ const requestFetchUser = () => {
   return REST.post('auth/fetch').then(res => res.data.user).catch(() => ({}));
 };
 
+///////////////////////////////////////////////////////
+
 export function* watchSignOutAsync() {
   yield takeLatest('WATCH_SIGN_OUT', workerSignOutAsync);
 }
@@ -119,6 +125,8 @@ function* workerSignOutAsync(action) {
 const requestSignOut = () => {
   return REST.get('auth/sign_out');
 };
+
+///////////////////////////////////////////////////////
 
 export function* watchUpdateProfile() {
   yield takeLatest('WATCH_UPDATE_PROFILE', workerUpdateProfile);

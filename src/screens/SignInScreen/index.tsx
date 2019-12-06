@@ -68,7 +68,7 @@ const RenderForm: React.FC<FormProps> = (props) => {
       {(form, setFormKeys, onPress) => (
         <>
           <Input
-            placeholder='email'
+            placeholder='Email'
             error={form['email'].error}
             value={form['email'].value}
             onChangeText={setFormKeys['email']}

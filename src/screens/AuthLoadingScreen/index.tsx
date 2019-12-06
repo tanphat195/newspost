@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, NetInfo, Linking, Platform, NativeModules } from 'react-native';
 import { NavigationStackScreenComponent } from 'react-navigation-stack';
 import styles from './styles';
 
 const AuthLoadingScreen: NavigationStackScreenComponent = (props) => {
   useEffect(() => {
+    checkInternet();
+
     props.fetchUser(async (err, user) => {
       if (!err || user.email) {
         props.navigation.navigate('App');
@@ -14,6 +16,19 @@ const AuthLoadingScreen: NavigationStackScreenComponent = (props) => {
       }
     });
   }, []);
+
+  const checkInternet = () => {
+    NetInfo.getConnectionInfo()
+      .then(res => {
+        const IOSWifiManager = NativeModules.IOSWifiManager;
+        if (res.type === 'none') {
+          Linking.openURL('app-settings:');
+        }
+      })
+      .catch(err => {
+        Linking.openURL('app-settings:');
+      });
+  };
 
   return (
     <View style={styles.main}>

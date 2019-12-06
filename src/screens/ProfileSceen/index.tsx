@@ -31,7 +31,7 @@ const ProfileSceen: NavigationStackScreenComponent<Props> = (props) => {
       style={styles.main}
       colors={[primary, '#FFF']}
       start={{x: 0, y: 0}}
-      end={{x:0.5, y: 0.5}}
+      end={{x:0.5, y: 1}}
     >
       <ScrollView>
         <View style={styles.banner} />
@@ -85,7 +85,7 @@ const RenderInfo: React.FC<InfoProps> = ({ navigation, logout, user, onEdit }) =
         <Button
           style={{
             borderRadius: 24,
-            width: 150,
+            width: 120,
           }}
           type="default"
           onPress={onEdit}
@@ -97,7 +97,7 @@ const RenderInfo: React.FC<InfoProps> = ({ navigation, logout, user, onEdit }) =
       <Button
         style={{
           borderRadius: 24,
-          width: 150,
+          width: 120,
           marginTop: 15
         }}
         type="primary"

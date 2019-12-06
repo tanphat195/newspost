@@ -4,8 +4,8 @@ const getPostById = (post_id) => {
   return Post.getPostById(post_id)
 }
 
-const getPosts = () => {
-  return Post.getPosts()
+const getPosts = (query) => {
+  return Post.getPosts(query)
 }
 
 const getPostsByUserEmail = (email) => {

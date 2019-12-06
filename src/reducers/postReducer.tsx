@@ -1,15 +1,27 @@
-export const POSTS_HOME = 'POSTS_HOME';
+export const GET_POSTS_HOME = 'GET_POSTS_HOME';
+export const LOAD_MORE_POSTS_HOME = 'LOAD_MORE_POSTS_HOME';
 
 const initialState = {
   posts_home: [],
 }
 
 const mapActions = {
-  [POSTS_HOME]: (state, payload) => {
+  [GET_POSTS_HOME]: (state, payload) => {
     return {
       ...state,
-      posts_home: [...payload],
+      posts_home: [
+        ...payload,
+      ],
     }
+  },
+  [LOAD_MORE_POSTS_HOME]: (state, payload) => {
+    return {
+      ...state,
+      posts_home: [
+        ...state.posts_home,
+        ...payload,
+      ],
+    };
   },
 };
 

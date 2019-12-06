@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text } from 'react-native';
-import { NavigationStackProp, NavigationStackScreenProps, NavigationStackScreenComponent, createStackNavigator } from 'react-navigation-stack';
+import { NavigationStackProp, NavigationStackScreenProps, NavigationStackScreenComponent } from 'react-navigation-stack';
 import styles from './styles';
 import GoBackArrow from '../../components/atoms/GoBackArrow';
 

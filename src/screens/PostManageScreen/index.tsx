@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, RefreshControl } from 'react-native';
+import { View, ScrollView, FlatList, RefreshControl, ActivityIndicator } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { NavigationStackProp, NavigationStackScreenProps, NavigationStackScreenComponent } from 'react-navigation-stack';
 import PostCard from '../../components/molecules/PostCard';
@@ -17,15 +17,18 @@ interface Props extends NavigationStackScreenProps {
 const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
   const [posts, setPosts] = useState([]);
   const [isRefreshing, setRefreshing] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getPostsByEmail();
   }, []);
 
   const getPostsByEmail = async () => {
+    setLoading(true);
     return REST.get(`users/${props.user.email}/posts`)
       .then(res => {
-        setPosts(res.data.posts)
+        setPosts(res.data.posts);
+        setLoading(false);
       });
   };
 
@@ -53,26 +56,25 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
   };
 
   return (
-    <View style={styles.main}>
-      <FlatList
-        data={posts}
-        renderItem={({item: post}) => (
-          <View style={styles.list}>
-            <RenderRow id={post.id} onEdit={onEdit} onDelete={onDelete}>
-              <PostCard post={post} navigation={props.navigation} />
-            </RenderRow>
+    <>
+      {loading ? (
+        <View style={styles.loading}>
+          <ActivityIndicator size='large' />
+        </View>
+      ) : (
+        <ScrollView>
+          <View style={styles.main}>
+            {posts.map(post => (
+              <View key={post.id} style={styles.list}>
+                <RenderRow id={post.id} onEdit={onEdit} onDelete={onDelete}>
+                  <PostCard post={post} navigation={props.navigation} />
+                </RenderRow>
+              </View>
+            ))}
           </View>
-        )}
-        keyExtractor={item => item.id}
-        refreshControl={
-          <RefreshControl
-            refreshing={isRefreshing}
-            onRefresh={onRefresh}
-          />
-        }
-        ItemSeparatorComponent={renderSeparator}
-      />
-    </View>
+        </ScrollView>
+      )}
+    </>
   );
 }
 

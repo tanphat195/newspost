@@ -1,6 +1,7 @@
 import { all, fork } from 'redux-saga/effects';
 import { watchSignUpAsync, watchSignInAsync, watchFetchUserAsync, watchSignOutAsync, watchUpdateProfile } from './userSaga';
-import { watchGetPosts } from './postSaga';
+import { watchGetPosts, watchLoadMorePosts } from './postSaga';
+import { watchAddCart, watchGetCarts, watchRemoveCart } from './cartSaga';
 
 export default function* () {
   yield all([
@@ -10,5 +11,9 @@ export default function* () {
     fork(watchSignOutAsync),
     fork(watchUpdateProfile),
     fork(watchGetPosts),
+    fork(watchLoadMorePosts),
+    fork(watchAddCart),
+    fork(watchGetCarts),
+    fork(watchRemoveCart),
   ]);
 };

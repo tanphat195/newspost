@@ -1,9 +1,9 @@
 const redis = require('redis')
-const { port, host } = require('../../config').cachingConfig
+const { port, host, redisUrl } = require('../../config').cachingConfig
 
 class Caching {
   constructor() {
-    this.redis = redis.createClient(port, host) 
+    this.redis = redis.createClient(redisUrl) 
 
     this.redis.on('connect', () => {
       console.log('Redis connected')

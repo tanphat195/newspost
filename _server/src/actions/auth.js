@@ -35,6 +35,7 @@ const signUp = async (body, callback) => {
       salt,
       full_name,
       gender: 'male',
+      phone_number: '',
       birthday: '',
       avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySUvnmtdzOdplk95Fa5ziU0jSCJ6QrrXdTVWRXexIyMNEdflI',
     }

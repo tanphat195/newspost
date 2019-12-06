@@ -7,7 +7,7 @@ export default StyleSheet.create({
     paddingBottom: 24,
   },
   main: {
-    height: 42,
+    height: 46,
     paddingLeft: 9,
     borderWidth: 1.5,
     borderRadius: 6,
