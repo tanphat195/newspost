@@ -36,9 +36,17 @@ PODS:
   - glog (0.3.5)
   - React (0.59.10):
     - React/Core (= 0.59.10)
+  - react-native-camera (3.13.1):
+    - React
+    - react-native-camera/RCT (= 3.13.1)
+    - react-native-camera/RN (= 3.13.1)
+  - react-native-camera/RCT (3.13.1):
+    - React
+  - react-native-camera/RN (3.13.1):
+    - React
   - react-native-image-picker (1.1.0):
     - React
-  - react-native-maps (0.26.1):
+  - react-native-maps (0.25.0):
     - React
   - React/Core (0.59.10):
     - yoga (= 0.59.10.React)
@@ -135,6 +143,7 @@ DEPENDENCIES:
   - EXWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-maps (from `../node_modules/react-native-maps`)
   - React/Core (from `../node_modules/react-native`)
@@ -215,6 +224,8 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   React:
     :path: "../node_modules/react-native"
+  react-native-camera:
+    :path: "../node_modules/react-native-camera"
   react-native-image-picker:
     :path: "../node_modules/react-native-image-picker"
   react-native-maps:
@@ -285,8 +296,9 @@ SPEC CHECKSUMS:
   Folly: de497beb10f102453a1afa9edbf8cf8a251890de
   glog: aefd1eb5dda2ab95ba0938556f34b98e2da3a60d
   React: 36d0768f9e93be2473b37e7fa64f92c1d5341eef
+  react-native-camera: 1df7f9a047591bbc2c9a7ec80bd6412d3c19579f
   react-native-image-picker: 7a85cf7b0a53845f03ae52fb4592a2748ded069b
-  react-native-maps: 6e499eee4eabf422ba8b6f94e993cc768bf35153
+  react-native-maps: 190c02ca533fddac5bb49cf17bdece3644612107
   RNCAsyncStorage: 3c304d1adfaea02ec732ac218801cb13897aa8c0
   RNGestureHandler: 5329a942fce3d41c68b84c2c2276ce06a696d8b0
   RNReanimated: 1b52415c4302f198cb581282a0166690bad62c43
@@ -306,6 +318,6 @@ SPEC CHECKSUMS:
   UMTaskManagerInterface: 1e70fe58b872355f0ecb44fb81bb1a16484047f0
   yoga: 684513b14b03201579ba3cee20218c9d1298b0cc
 
-PODFILE CHECKSUM: c2e476733ba9bb75c84e8b2b3197a71ad7253ebd
+PODFILE CHECKSUM: 1ff776d2557491453857140eaad160577de54682
 
 COCOAPODS: 1.8.4

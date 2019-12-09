@@ -51,7 +51,7 @@ const FadeInView: React.FC<AnimatedProps> = (props) => {
       Animated.timing(
         fadeAnim,
         {
-          toValue: 62,
+          toValue: 66,
           duration: 200,
         }
       ).start();

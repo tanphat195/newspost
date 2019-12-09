@@ -4,7 +4,7 @@ import { primary } from '../../../styles/color';
 export default StyleSheet.create({
   main: {
     height: 40,
-    borderRadius: 6,
+    borderRadius: 4,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

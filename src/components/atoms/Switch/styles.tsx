@@ -5,7 +5,7 @@ export default StyleSheet.create({
   main : {
     borderRadius: 24,
     width: 100,
-    height: 40,
+    height: 36,
     padding: 2,
     position: 'relative',
     borderWidth: 2,
@@ -19,8 +19,8 @@ export default StyleSheet.create({
     borderColor: primary,
   },
   pointer: {
-    width: 32,
-    height:32,
+    width: 28,
+    height:28,
     borderRadius: 20,
     position: 'absolute',
     top: 2,

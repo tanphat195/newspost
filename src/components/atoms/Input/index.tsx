@@ -6,6 +6,7 @@ interface Props extends TextInputProps {
   type?: string;
   error?: string;
   label?: string;
+  icon?: any;
 }
 
 const Input: React.FC<Props> = (props) => {
@@ -20,12 +21,24 @@ const Input: React.FC<Props> = (props) => {
   }, [isFocused]);
 
   return (
-    <View style={styles.container}>
-      {props.label && <Text style={styles.labelText}>{props.label}</Text>}
+    <View style={styles.main}>
+      {props.label && (
+        <View pointerEvents='none'style={[
+          styles.viewText,
+          (isFocused || props.value) && styles.viewText_hover,
+        ]}>
+          <Text style={[
+            styles.labelText,
+            (isFocused || props.value) && styles.labelText_hover,
+          ]}>
+            {props.label}
+          </Text>
+        </View>
+      )}
       <TextInput
         {...props}
         style={[
-          styles.main,
+          styles.input,
           props.style,
           isFocused && styles.focusBorder,
           props.error && styles.errorBorder
