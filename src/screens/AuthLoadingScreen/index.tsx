@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { View, ActivityIndicator, NetInfo, Linking, Platform, NativeModules } from 'react-native';
+import { View, ActivityIndicator, NetInfo, Linking, Alert, NativeModules } from 'react-native';
 import { NavigationStackScreenComponent } from 'react-navigation-stack';
 import styles from './styles';
 
@@ -17,16 +17,28 @@ const AuthLoadingScreen: NavigationStackScreenComponent = (props) => {
     });
   }, []);
 
+  const suggestOpenInternet = () => {
+    Alert.alert(
+      'No internet connection',
+      '',
+      [
+        {text: 'None', onPress: () => {}},
+        {text: 'Go to Setting', onPress: () => {
+          Linking.openURL('app-settings:');
+        }},
+      ]
+    );
+  };
+
   const checkInternet = () => {
     NetInfo.getConnectionInfo()
       .then(res => {
-        const IOSWifiManager = NativeModules.IOSWifiManager;
         if (res.type === 'none') {
-          Linking.openURL('app-settings:');
+          suggestOpenInternet();
         }
       })
       .catch(err => {
-        Linking.openURL('app-settings:');
+        suggestOpenInternet();
       });
   };
 

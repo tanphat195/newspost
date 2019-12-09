@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useImperativeHandle, forwardRef } from 'react';
 import { isRequired, isEmail, minLength, maxLength, validateForm, checkForm, getFormErrors, getFormValues } from './validate';
 
 type isRequired = {
@@ -38,12 +38,14 @@ type InitialFormType = {
 
 interface Props {
   initialForm: InitialFormType;
-  onPressTrigger: Function;
   children: any;
 };
 
-const Form = (props: Props) => {
+const Form = (props: Props, ref) => {
   const [form, setForm] = useState(props.initialForm);
+  useImperativeHandle(ref, () => ({
+    submit
+  }));
 
   const updateFormKey = (key, value) => {
     const newForm = {
@@ -64,20 +66,20 @@ const Form = (props: Props) => {
 
   
 
-  const onPress = () => {
+  const submit = (callback) => {
     const newForm = validateForm(form);
     setForm(newForm);
     if (!checkForm(newForm)) {
       const values = getFormValues(newForm);
-      props.onPressTrigger(false, values);
+      callback(false, values);
     } else {
       const errors = getFormErrors(newForm);
-      props.onPressTrigger(true, errors)
+      callback(true, errors)
     }
   };
   
   return (
-    props.children(form, setFormKeys, onPress)
+    props.children(form, setFormKeys)
   )
 }
-export default Form;
+export default forwardRef(Form);

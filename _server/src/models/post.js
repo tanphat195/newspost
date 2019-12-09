@@ -21,7 +21,6 @@ const getPosts = async (query) => {
 
   const startIndex = (per_page * (page - 1))
   const endIndex = (per_page * page)
-
   const total_pages = Math.ceil(postsReverse.length / per_page)
 
   const data = {
@@ -86,7 +85,7 @@ const updatePost = async (post) => {
     let finalPost = {}
 
     if (post.address && post.address !== get_post.address) {
-      const location = await geoAction.getLocation(post.address).then(res => res).catch(() => null)
+      const location = await getLocation(post.address).then(res => res).catch(() => null)
       finalPost = {
         ...get_post,
         ...post,
@@ -99,6 +98,7 @@ const updatePost = async (post) => {
       }
     }
     return Caching.hset(CachingKey.POSTS_KEY, post.id, JSON.stringify(finalPost))
+      .then(() => finalPost).catch(err => err)
   } else {
     return Promise.reject('Post not exists')
   }

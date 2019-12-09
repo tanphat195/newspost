@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { Alert } from 'react-native';
 
 const REST = axios.create({
-  baseURL: 'http://192.168.1.231:3456/api',
+  baseURL: 'http://192.168.1.6:3456/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
@@ -21,7 +22,9 @@ REST.interceptors.request.use(async (config) => {
 });
 
 REST.interceptors.response.use(res => res, (error) => {
-  if (error.response && error.response.status === 401 && !error.response.request.responseURL.includes('sign_in')) {
+  if (error.message === 'Network Error') {
+    Alert.alert(error.message);
+  } else if (error.response && error.response.status === 401 && !error.response.request.responseURL.includes('sign_in')) {
     return Promise.reject(error);
   } else {
     return Promise.reject(error);

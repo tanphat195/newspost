@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, Text, KeyboardAvoidingView, TouchableOpacity, Alert } from 'react-native';
 import { NavigationStackProp, NavigationStackScreenComponent } from 'react-navigation-stack';
 import styles from './styles';
@@ -37,6 +37,12 @@ interface FormProps {
 }
 
 const RenderForm: React.FC<FormProps> = (props) => {
+  const formRef = useRef(null);
+
+  const onSubmit = () => {
+    formRef.current.submit(handleLogin);
+  }
+
   const handleLogin = (err, values) => {
     if (!err) {
       props.login(values, (error, msg) => {
@@ -59,29 +65,29 @@ const RenderForm: React.FC<FormProps> = (props) => {
 
   return (
     <Form
+      ref={formRef}
       initialForm={{
         email: {value: '', validate: [{isEmail: true, message: 'Email invalid!'}]},
         password: {value: '', validate: [{ min: 6, message: 'Min 6 characters!'}]},
       }}
-      onPressTrigger={handleLogin}
     >
-      {(form, setFormKeys, onPress) => (
+      {(form, setFormKeys) => (
         <>
           <Input
-            placeholder='Email'
+            label='Email'
             error={form['email'].error}
             value={form['email'].value}
             onChangeText={setFormKeys['email']}
             keyboardType='email-address'
           />
           <Input
+            label='Password'
             secureTextEntry={true}
-            placeholder='Password'
             error={form['password'].error}
             value={form['password'].value}
             onChangeText={setFormKeys['password']}
           />
-          <Button type='primary' onPress={onPress}>Login</Button>
+          <Button type='primary' onPress={onSubmit}>Login</Button>
         </>
       )}
     </Form>

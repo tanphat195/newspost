@@ -62,17 +62,22 @@ const PostManageScreen: NavigationStackScreenComponent<Props> = (props) => {
           <ActivityIndicator size='large' />
         </View>
       ) : (
-        <ScrollView>
-          <View style={styles.main}>
-            {posts.map(post => (
+        <View style={styles.main}>
+          <FlatList
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+            data={posts}
+            renderItem={({ item: post }) => (
               <View key={post.id} style={styles.list}>
                 <RenderRow id={post.id} onEdit={onEdit} onDelete={onDelete}>
                   <PostCard post={post} navigation={props.navigation} />
                 </RenderRow>
               </View>
-            ))}
-          </View>
-        </ScrollView>
+            )}
+            ItemSeparatorComponent={renderSeparator}
+            keyExtractor={item => `${item.id}`}
+          />
+        </View>
       )}
     </>
   );

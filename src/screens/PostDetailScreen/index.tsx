@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View, Text, Image } from 'react-native';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { View, Text, Image, Alert, Linking } from 'react-native';
 import {
   NavigationStackProp,
   NavigationStackScreenProps,
@@ -12,16 +12,13 @@ import Divider from '../../components/atoms/Divider';
 import Button from '../../components/atoms/Button';
 import GoBackArrow from '../../components/atoms/GoBackArrow';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import REST from '../../utils/api';
 import styles from './styles';
-import MapView, { Marker } from 'react-native-maps';
-<<<<<<< HEAD
-<<<<<<< HEAD
+import MapView, { Marker, Polyline, Polygon } from 'react-native-maps';
 import { connect } from 'react-redux';
-=======
->>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
-=======
->>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
+import { getDistance } from '../../utils';
 
 type Location = {
   lat: number,
@@ -49,10 +46,12 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
   const scrollViewRef = useRef<ImperativeScrollViewHandles>(null);
   const [post, setPost] = useState({});
   const [related_posts, setRelatedPosts] = useState<Post[]>([]);
+  const [deviceLocation, setDeviceLocation] = useState({latitude: 0, longitude: 0});
 
   useEffect(() => {
     scrollViewRef.current.scrollToStart();
     setPost(props.navigation.getParam('post'));
+    getDeviceLocation();
   }, [props.navigation.getParam('post')]);
 
   useEffect(() => {
@@ -62,20 +61,33 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
       });
   }, []);
 
+  const getDeviceLocation = () => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        setDeviceLocation(position.coords);
+      },
+      error => {
+        Alert.alert(
+          error.message,
+          '',
+          [
+            {text: 'None'},
+            {text: 'Go to Setting', onPress: () => {
+              Linking.openURL('App-prefs:root=Privacy');
+            }},
+          ],
+        );
+      },
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 200 },
+    );
+  }
+
   const handleAddToCart = () => {
-<<<<<<< HEAD
-<<<<<<< HEAD
     props.addCart(post);
   };
 
   const handleRemoveCart = () => {
     props.removeCart(post.id);
-=======
-
->>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
-=======
-
->>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
   };
 
   return (
@@ -87,8 +99,6 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
           <Text style={styles.creator}>{post.creator}</Text>
           <Text style={styles.created_at}>{moment(post.created_at).fromNow()}</Text>
           <Text style={styles.description}>{post.description}</Text>
-<<<<<<< HEAD
-
           {props.carts.map(item => item.id).includes(post.id) ? (
             <Button
               style={{marginVertical: 20}}
@@ -106,30 +116,15 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
               Add to Cart
             </Button>
           )}
-=======
-          <Button
-            style={{marginVertical: 20}}
-            type='primary'
-            onPress={handleAddToCart}
-          >
-            Add to Cart
-          </Button>
->>>>>>> 2ffd8995bf16a76d300a2e7e8bf3aa71217b7031
-        </View>
-
-        <View style={styles.addressWrapper}>
-          <MaterialIcons size={20} color='#fd5068' name='location-on' />
-          <Text style={styles.address}>: {post.address}</Text>
         </View>
 
         {post.location && (
-          <View style={styles.mapsWrapper}>
-            <RenderMap
-              location={post.location}
-              creator={post.creator}
-              address={post.address}
-            />
-          </View>
+          <RenderMap
+            location={post.location}
+            creator={post.creator}
+            address={post.address}
+            deviceLocation={deviceLocation}
+          />
         )}
 
         <View style={styles.relatedPosts}>
@@ -150,6 +145,10 @@ interface MapProps {
   location: Location;
   address: string;
   creator: string;
+  deviceLocation: {
+    latitude: number,
+    longitude: number,
+  };
 }
 
 const RenderMap: React.FC<MapProps> = React.memo((props) => {
@@ -162,33 +161,73 @@ const RenderMap: React.FC<MapProps> = React.memo((props) => {
   const [address, setAddress] = useState('');
   const [creator, setCreator] = useState('');
 
+  const distance = useMemo(() => getDistance(
+    {lat1: props.deviceLocation.latitude, long1: props.deviceLocation.longitude},
+    {lat2: region.latitude, long2: region.longitude},
+    'K',
+  ), [props.deviceLocation, region]);
+
   useEffect(() => {
     setRegion({
       latitude: props.location.lat || 0,
       longitude: props.location.lng || 0,
-      latitudeDelta: 0.02,
-      longitudeDelta: 0.02,
+      latitudeDelta: 0.1,
+      longitudeDelta: 0.1,
     });
     setAddress(props.address);
     setCreator(props.creator);
-  }, [props.location]);
+  }, [props.location, props.address, props.creator]);
 
   return (
-    <MapView
-      style={styles.maps}
-      region={region}
-    >
-      <Marker
-        coordinate={{
-          latitude: region.latitude,
-          longitude: region.longitude,
-        }}
-        title={creator}
-        description={address}
+    <View style={styles.mapsWrapper}>
+      <View style={styles.addressWrapper}>
+        <MaterialIcons size={20} color='#fd5068' name='location-on' />
+        <Text style={styles.address}> {address}</Text>
+      </View>
+      <View style={styles.addressWrapper}>
+        <MaterialCommunityIcons size={20} color='#fd5068' name='map-marker-distance' />
+        <Text style={styles.address}> Distance {parseFloat(distance.toFixed(1))} km to you</Text>
+      </View>
+      <MapView
+        style={styles.maps}
+        region={region}
       >
-        <MaterialIcons size={32} color='#fd5068' name='location-on' />
-      </Marker>
-    </MapView>
+        {props.deviceLocation.latitude !== 0 && props.deviceLocation.longitude !== 0 && (
+          <Polyline
+            coordinates={[
+              { latitude: props.deviceLocation.latitude, longitude: props.deviceLocation.longitude },
+              { latitude: region.latitude, longitude: region.longitude },
+            ]}
+            strokeColor="#000"
+            strokeColors={[
+              '#41BAEE',
+              '#f4115d',
+            ]}
+            strokeWidth={3}
+          />
+        )}
+        <Marker
+          coordinate={{
+            latitude: props.deviceLocation.latitude,
+            longitude: props.deviceLocation.longitude,
+          }}
+          title={creator}
+          description={address}
+        >
+          <FontAwesome5 size={20} color='#41BAEE' name='user-alt' />
+        </Marker>
+        <Marker
+          coordinate={{
+            latitude: region.latitude,
+            longitude: region.longitude,
+          }}
+          title={creator}
+          description={address}
+        >
+          <MaterialIcons size={28} color='red' name='location-on' />
+        </Marker>
+      </MapView>
+    </View>
   );
 });
 

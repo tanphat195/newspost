@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import {
   NavigationStackProp,
@@ -116,6 +116,12 @@ interface FormProps {
 }
 
 const RenderForm: React.FC<FormProps> = ({ user, updateProfile, setEnableEdit }) => {
+  const formRef = useRef(null);
+
+  const onSubmit = () => {
+    formRef.current.submit(onUpdate);
+  };
+
   const onUpdate = (err, values) => {
     if (!err) {
       const newValues = {
@@ -137,12 +143,12 @@ const RenderForm: React.FC<FormProps> = ({ user, updateProfile, setEnableEdit })
   return (
     <View style={styles.form}>
       <Form
+        ref={formRef}
         initialForm={{
           full_name: {value: user.full_name ? user.full_name : '', validate: [{isRequired: true, message: 'Full name is required!'}]},
           gender: {value: user.gender === 'male' },
           phone_number: {value: user.phone_number ? user.phone_number : ''},
         }}
-        onPressTrigger={onUpdate}
       >
         {(form, setFormKeys, onPress) => (
           <View style={styles.formWaraper}>
@@ -166,7 +172,7 @@ const RenderForm: React.FC<FormProps> = ({ user, updateProfile, setEnableEdit })
               onChange={setFormKeys['gender']}
             />
             <View style={styles.action}>
-              <Button type='primary' onPress={onPress}>Update</Button>
+              <Button type='primary' onPress={onSubmit}>Update</Button>
               <Button style={{marginLeft: 20}} onPress={onCancel}>Cancel</Button>
             </View>
           </View>

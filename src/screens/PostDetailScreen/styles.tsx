@@ -47,18 +47,17 @@ export default StyleSheet.create({
   wrap: {
     flexDirection: 'column',
   },
+  mapsWrapper: {
+    height: 240,
+    paddingBottom: 20,
+  },
   addressWrapper: {
     flexDirection: 'row',
     paddingHorizontal: 20,
     marginBottom: 6,
   },
   address: {
-    fontSize: 16,
     color: 'rgba(0,0,0,0.6)',
-  },
-  mapsWrapper: {
-    height: 240,
-    paddingBottom: 20,
   },
   maps: {
     width: '100%',

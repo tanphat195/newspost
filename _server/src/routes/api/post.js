@@ -17,13 +17,13 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   postAction.createPost(req.body)
-    .then(result => res.json(result))
+    .then(post => res.json(post))
     .catch(errors => res.status(404).json({errors: 'Not found'}))
 })
 
 router.put('/', (req, res, next) => {
   postAction.updatePost(req.body)
-    .then(result => res.json(result))
+    .then(post => res.json(post))
     .catch(errors => res.status(404).json({errors}))
 })
 

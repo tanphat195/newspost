@@ -2,37 +2,28 @@ import { StyleSheet } from 'react-native';
 import { primary } from '../../../styles/color';
 
 export default StyleSheet.create({
-  container: {
+  main: {
     position: "relative",
     paddingBottom: 24,
   },
-  main: {
+  input: {
     height: 46,
     paddingLeft: 9,
-    borderWidth: 1.5,
-    borderRadius: 6,
-    borderColor: 'rgba(0,0,0,0.1)',
-    color: 'rgba(0,0,0,0.55)',
+    borderWidth: 0.5,
+    borderColor: 'rgba(240,240,240,1)',
+    borderBottomWidth: 2,
+    borderBottomColor: 'rgba(0,0,0,0.15)',
+    color: 'rgba(0,0,0,0.6)',
     fontSize: 16,
-    zIndex: 10,
+    zIndex: 1,
+    backgroundColor: '#f5f5f5',
+    paddingTop: 6,
   },
   focusBorder: {
-    borderColor: primary,
-    // shadowOffset: {
-    //   width: 0, height: 0
-    // },
-    // shadowOpacity: 1,
-    // shadowColor: "#41BAEE",
-    // shadowRadius: 0.5,
+    borderBottomColor: primary,
   },
   errorBorder: {
-    borderColor: "#f4115d",
-    // shadowOffset: {
-    //   width: 0, height: 0
-    // },
-    // shadowOpacity: 1,
-    // shadowColor: "red",
-    // shadowRadius: 0.5,
+    borderBottomColor: '#f4115d',
   },
   errorText: {
     position: "absolute",
@@ -41,9 +32,20 @@ export default StyleSheet.create({
     bottom: 0,
     marginBottom: 6,
   },
+  viewText: {
+    top: '30%',
+    left: 9,
+    zIndex: 2,
+    position: 'absolute',
+  },
+  viewText_hover: {
+    top: 0,
+  },
   labelText: {
-    marginLeft: 4,
-    marginBottom: 2,
-    color: 'rgba(0,0,0,0.4)',
+    color: 'rgba(0,0,0,0.2)',
+  },
+  labelText_hover: {
+    fontSize: 12,
+    color: primary,
   },
 });
