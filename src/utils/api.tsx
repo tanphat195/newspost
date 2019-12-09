@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Alert } from 'react-native';
 
 const REST = axios.create({
-  baseURL: 'http://192.168.1.6:3456/api',
+  baseURL: 'http://172.16.10.148:3456/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

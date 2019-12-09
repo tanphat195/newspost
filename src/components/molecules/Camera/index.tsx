@@ -54,8 +54,8 @@ const CameraComponent: React.FC<Props> = (props, ref) => {
 
   const onTakePictureAsync = async () => {
     if (cameraRef) {
-      let file = await cameraRef.current.takePictureAsync();
-      setPhoto(file.uri);
+      let file = await cameraRef.current.takePictureAsync({base64: true, quality: 0.5});
+      setPhoto(`data:image/jpg;base64,${file.base64}`);
     }
   };
 
@@ -77,7 +77,7 @@ const CameraComponent: React.FC<Props> = (props, ref) => {
 
   const onOk = () => {
     props.getFile(photo);
-    // setPhoto('');
+    setPhoto('');
     closeCamera();
   };
 
@@ -104,28 +104,12 @@ const CameraComponent: React.FC<Props> = (props, ref) => {
         }}
       >
         {photo ? (
-          <View style={styles.photoContainer}>
-            <View style={styles.photoWrapper}>
-              <Image style={styles.photo} source={{uri: photo}} />
-            </View>
-            <View style={styles.actionGroup}>
-              <TouchableOpacity
-                style={styles.action}
-                onPress={onOk}
-              >
-                <Text style={styles.text}>OK</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={styles.action}
-                onPress={onCancel}
-              >
-                <Text style={styles.text}>Cancel</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+          <RenderPhoto photo={photo} onOk={onOk} onCancel={onCancel} />
         ) : (
-          <Camera ref={cameraRef} style={styles.camera} type={type}>
+          <Camera
+            ref={cameraRef}
+            style={styles.camera} type={type}
+          >
             <View style={styles.main}>
               <View style={styles.close}>
                 <TouchableOpacity style={{ padding: 4 }} onPress={closeCamera}>
@@ -170,6 +154,39 @@ const CameraComponent: React.FC<Props> = (props, ref) => {
       </Modal>
     );
   }
+};
+
+interface PhotoProps {
+  photo: string;
+  onOk: () => void;
+  onCancel: () => void;
+};
+
+const RenderPhoto: React.FC<PhotoProps> = (props) => {
+  const { photo, onOk, onCancel } = props;
+
+  return (
+    <View style={styles.photoContainer}>
+      <View style={styles.photoWrapper}>
+        <Image style={styles.photo} source={{uri: photo}} />
+      </View>
+      <View style={styles.actionGroup}>
+        <TouchableOpacity
+          style={styles.action}
+          onPress={onOk}
+        >
+          <Text style={styles.text}>OK</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.action}
+          onPress={onCancel}
+        >
+          <Text style={styles.text}>Cancel</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 };
 
 export default forwardRef(CameraComponent);

@@ -150,7 +150,7 @@ const RenderForm: React.FC<FormProps> = ({ user, updateProfile, setEnableEdit })
           phone_number: {value: user.phone_number ? user.phone_number : ''},
         }}
       >
-        {(form, setFormKeys, onPress) => (
+        {(form, setFormKeys) => (
           <View style={styles.formWaraper}>
             <Input
               error={form['full_name'].error}
