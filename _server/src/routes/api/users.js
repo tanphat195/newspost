@@ -1,13 +1,13 @@
 const router = module.exports = require('express').Router()
 const { userAction, postAction } = require('../../actions')
 
-router.get('/', (req, res, next) => {
-  userAction.getUsers()
-    .then(users => {
-      return res.json({users})
-    })
-    .catch(next)
-})
+// router.get('/', (req, res, next) => {
+//   userAction.getUsers()
+//     .then(users => {
+//       return res.json({users})
+//     })
+//     .catch(next)
+// })
 
 router.get('/:id', (req, res, next) => {
   userAction.getUserById(req.params.id)

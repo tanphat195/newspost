@@ -73,6 +73,7 @@ const signIn = async (body, callback) => {
     callback({status: 401, msg: 'Password must be more than 8 characters'})
   } else {
     const get_user = await User.getUser(email)
+    console.log(get_user)
     if (!get_user) {
       callback({status: 401, msg: 'Invalid login credentials. Please try again.'})
     } else {

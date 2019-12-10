@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 
 const app = express()
-const port = 3456
+const port = process.env.PORT || 3456
 
 app.use(cors())
 app.use(cookieParser())

@@ -8,7 +8,7 @@ export const getCarts = async () => {
   } catch (err) {
     throw err;
   }
-}
+};
 
 export const addOrUpdateCart = async (cart) => {
   try {
@@ -34,7 +34,7 @@ export const addOrUpdateCart = async (cart) => {
   } catch (err) {
     throw err;
   }
-}
+};
 
 export const removeCart = async (id) => {
   try {
@@ -53,4 +53,4 @@ export const setCarts = async (carts) => {
   } catch (err) {
     throw err;
   }
-}
+};

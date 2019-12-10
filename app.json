@@ -8,10 +8,66 @@
     "sdkVersion": "35.0.0",
     "version": "1.0.0",
     "entryPoint": "node_modules/expo/AppEntry.js",
+    "orientation": "portrait",
+    "icon": "./src/assets/icons/icon.png",
     "platforms": [
       "ios",
       "android",
       "web"
     ]
-  }
+  },
+  "ios": {
+    "bundleIdentifier": "com.yourcompany.yourappname",
+    "supportsTablet": true
+  },
+  "android": {
+    "package": "com.yourcompany.yourappname"
+  },
+  "splash": {
+    "image": "./src/assets/icons/icon.png",
+    "resizeMode": "contain",
+    "backgroundColor": "#ffffff"
+  },
+  "updates": {
+    "fallbackToCacheTimeout": 0
+  },
+  "assetBundlePatterns": [
+    "**/*"
+  ]
 }
+
+
+// {
+//   "expo": {
+//     "name": "First React App",
+//     "slug": "FirstReactNativeApp",
+//     "privacy": "public",
+//     "sdkVersion": "35.0.0",
+//     "version": "1.0.0",
+//     "orientation": "portrait",
+//     "icon": "./assets/icon.png",
+//     "ios": {
+//       "bundleIdentifier": "com.yourcompany.yourappname",
+//       "supportsTablet": true,
+//     },
+//     "android": {
+//       "package": "com.yourcompany.yourappname",
+//     },
+//     "platforms": [
+//       "ios",
+//       "android",
+//       "web"
+//     ],
+//     "splash": {
+//       "image": "./assets/splash.png",
+//       "resizeMode": "contain",
+//       "backgroundColor": "#ffffff"
+//     },
+//     "updates": {
+//       "fallbackToCacheTimeout": 0
+//     },
+//     "assetBundlePatterns": [
+//       "**/*"
+//     ],
+//   }
+// }

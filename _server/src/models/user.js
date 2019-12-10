@@ -1,6 +1,15 @@
 const Caching = require('../services/Caching')
 const CachingKey = require('../services/CachingKey')
 
+const userToJSON = user => ({
+  email: user.email,
+  full_name: user.full_name,
+  gender: user.gender,
+  avatar: user.avatar,
+  phone_number: user.phone_number,
+  birthday: user.birthday,
+})
+
 const getUser = async (email) => {
   const user = await Caching.hget(CachingKey.USERS_KEY, email)
   return JSON.parse(user)
