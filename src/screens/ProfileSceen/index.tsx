@@ -85,7 +85,7 @@ const RenderInfo: React.FC<InfoProps> = ({ navigation, logout, user, onEdit }) =
         <Button
           style={{
             borderRadius: 24,
-            width: 120,
+            width: 130,
           }}
           type="default"
           onPress={onEdit}
@@ -97,7 +97,7 @@ const RenderInfo: React.FC<InfoProps> = ({ navigation, logout, user, onEdit }) =
       <Button
         style={{
           borderRadius: 24,
-          width: 120,
+          width: 130,
           marginTop: 15
         }}
         type="primary"
@@ -150,19 +150,19 @@ const RenderForm: React.FC<FormProps> = ({ user, updateProfile, setEnableEdit })
           phone_number: {value: user.phone_number ? user.phone_number : ''},
         }}
       >
-        {(form, setFormKeys, onPress) => (
+        {(form, setFormKeys) => (
           <View style={styles.formWaraper}>
             <Input
               error={form['full_name'].error}
               value={form['full_name'].value}
               onChangeText={setFormKeys['full_name']}
-              label={'Full Name:'}
+              label={'Full Name'}
             />
             <Input
               error={form['phone_number'].error}
               value={form['phone_number'].value}
               onChangeText={setFormKeys['phone_number']}
-              label={'Phone Number:'}
+              label={'Phone Number'}
             />
             <Switch
               label={'Gender:'}

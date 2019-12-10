@@ -9,6 +9,7 @@ export default StyleSheet.create({
   input: {
     height: 46,
     paddingLeft: 9,
+    borderRadius: 2,
     borderWidth: 0.5,
     borderColor: 'rgba(240,240,240,1)',
     borderBottomWidth: 2,
@@ -16,8 +17,8 @@ export default StyleSheet.create({
     color: 'rgba(0,0,0,0.6)',
     fontSize: 16,
     zIndex: 1,
-    backgroundColor: '#f5f5f5',
-    paddingTop: 6,
+    backgroundColor: 'rgba(240,245,255,1)',
+    paddingTop: 9,
   },
   focusBorder: {
     borderBottomColor: primary,
@@ -38,13 +39,13 @@ export default StyleSheet.create({
     zIndex: 2,
     position: 'absolute',
   },
-  viewText_hover: {
-    top: 0,
+  viewText_focus: {
+    top: 2,
   },
   labelText: {
-    color: 'rgba(0,0,0,0.2)',
+    color: 'rgba(0,0,0,0.3)',
   },
-  labelText_hover: {
+  labelText_focus: {
     fontSize: 12,
     color: primary,
   },

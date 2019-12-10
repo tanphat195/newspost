@@ -99,6 +99,8 @@ router.put('/update_profile', (req, res) => {
           res.json({ user: {...req.body, email: user.email}})
         })
         .catch(errors => res.status(403).json({errors}))
+    } else {
+      res.status(401).json({errors: 'Not authenticated'})
     }
   })
 });

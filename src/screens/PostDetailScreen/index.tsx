@@ -44,14 +44,14 @@ interface Props extends NavigationStackScreenProps {
 
 const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
   const scrollViewRef = useRef<ImperativeScrollViewHandles>(null);
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState<Post>({});
   const [related_posts, setRelatedPosts] = useState<Post[]>([]);
   const [deviceLocation, setDeviceLocation] = useState({latitude: 0, longitude: 0});
 
   useEffect(() => {
     scrollViewRef.current.scrollToStart();
-    setPost(props.navigation.getParam('post'));
     getDeviceLocation();
+    setPost(props.navigation.getParam('post'));
   }, [props.navigation.getParam('post')]);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const PostDetailScreen: NavigationStackScreenComponent<Props> = (props) => {
           ],
         );
       },
-      { enableHighAccuracy: true, timeout: 20000, maximumAge: 200 },
+      // { enableHighAccuracy: true, timeout: 20000, maximumAge: 200 }
     );
   }
 
@@ -186,7 +186,7 @@ const RenderMap: React.FC<MapProps> = React.memo((props) => {
       </View>
       <View style={styles.addressWrapper}>
         <MaterialCommunityIcons size={20} color='#fd5068' name='map-marker-distance' />
-        <Text style={styles.address}> Distance {parseFloat(distance.toFixed(1))} km to you</Text>
+        <Text style={styles.address}> Distance to you {parseFloat(distance.toFixed(1))} km</Text>
       </View>
       <MapView
         style={styles.maps}

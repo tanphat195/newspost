@@ -87,7 +87,7 @@ const RenderForm: React.FC<FormProps> = (props) => {
             value={form['password'].value}
             onChangeText={setFormKeys['password']}
           />
-          <Button type='primary' onPress={onSubmit}>Login</Button>
+          <Button style={{height: 46}} type='primary' onPress={onSubmit}>Login</Button>
         </>
       )}
     </Form>

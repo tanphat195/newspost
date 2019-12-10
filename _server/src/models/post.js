@@ -58,7 +58,7 @@ const getsetNextId = async () => {
 const createPost = async (post) => {
   try {
     const id = await getsetNextId()
-
+    
     let location = null
     if (post.address) {
       location = await getLocation(post.address).then(res => res).catch(() => null)
@@ -72,6 +72,7 @@ const createPost = async (post) => {
       location,
       created_at: new Date(),
     }
+    
     await Caching.hset(CachingKey.POSTS_KEY, id, JSON.stringify(finalPost))
     return finalPost
   } catch (err) {

@@ -69,7 +69,7 @@ const HomeScreen: NavigationStackScreenComponent = (props) => {
           data={[(
             <View style={styles.main}>
               <TopPost navigation={props.navigation} post={props.posts_home[0] || {}} />
-              <NewPosts navigation={props.navigation} posts={props.posts_home} />
+              <NewPosts navigation={props.navigation} posts={props.posts_home.filter((item, index) => index > 0)} />
             </View>
           )]}
           renderItem={({ item }) => item}

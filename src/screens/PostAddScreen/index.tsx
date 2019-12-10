@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, PureComponent, createRef } from 'react';
-import { View, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import ImagePicker from 'react-native-image-picker';
 import {
@@ -16,6 +16,7 @@ import { primary } from '../../styles/color';
 import REST from '../../utils/api';
 import styles from './styles';
 import Camera from '../../components/molecules/Camera';
+import { converterDataURItoBlob } from '../../utils';
 
 interface Props extends NavigationStackScreenProps {
   navigation: NavigationStackProp;
@@ -35,7 +36,6 @@ const PostAddScreen: NavigationStackScreenComponent<Props> = (props) => {
   const [post, setPost] = useState<Post>((
     props.navigation.state.params && props.navigation.state.params.post)
     ? props.navigation.state.params.post : {});
-  const [openCamera, setOpenCamera] = useState(false);
 
   useEffect(() => {
     props.navigation.setParams({ onSubmit });
@@ -85,7 +85,17 @@ const PostAddScreen: NavigationStackScreenComponent<Props> = (props) => {
             console.log(err.response.data);
           });
       } else {
-        REST.post('posts', values)
+        const formData = new FormData()
+        for (let i in values) {
+          if (i === 'photo') {
+            const blob = converterDataURItoBlob(values[i]);
+            formData.append(i, 'https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/cosmetics/cosmeticsdesign.com/headlines/regulation-safety/natural-cosmetics-act-to-set-legal-definition-of-natural/10339779-1-eng-GB/Natural-Cosmetics-Act-to-set-legal-definition-of-natural_wrbm_large.jpg');
+          } else {
+            formData.append(i, values[i])
+          }
+        }
+        
+        REST.post('posts', {form: formData})
           .then(res => {
             props.navigation.navigate('PostManage');
           })
@@ -100,25 +110,19 @@ const PostAddScreen: NavigationStackScreenComponent<Props> = (props) => {
     cameraRef.current.openCamera();
   };
 
-  const getFile = file => {
-    setPost({
-      ...post,
-      photo: file,
-    });
-  };
-
   return (
     <ScrollView>
       <View style={styles.main}>
         <Form
           ref={formRef}
           initialForm={{
-            title: { value: post.title ? post.title : '', validate:[{isRequired: true, message: 'Title is required!'}] },
-            address: { value: post.address ? post.address : ''},
-            description: {value: post.description ? post.description : '', validate: [{isRequired: true, message: 'Description is required!'}]}
+            title: {value: post.title ? post.title : '', validate:[{isRequired: true, message: 'Title is required!'}]},
+            address: {value: post.address ? post.address : '', validate: [{isRequired: true, message: 'Address is required!'}]},
+            description: {value: post.description ? post.description : '', validate: [{isRequired: true, message: 'Description is required!'}]},
+            photo: {value: post.photo ? post.photo : '', validate: [{isRequired: true, message: 'Photo is required!'}]},
           }}
         >
-          {(form, setFormKeys, onPress) => (
+          {(form, setFormKeys) => (
             <>
               <View style={styles.title}>
                 <Input
@@ -151,6 +155,7 @@ const PostAddScreen: NavigationStackScreenComponent<Props> = (props) => {
                   numberOfLines={8}
                   style={{
                     height: 240,
+                    paddingTop: 20,
                   }}
                   value={form['description'].value}
                   error={form['description'].error}
@@ -159,14 +164,17 @@ const PostAddScreen: NavigationStackScreenComponent<Props> = (props) => {
               </View>
 
               <TouchableOpacity style={styles.photo} onPress={handleOpenCamera}>
-                {post.id ? (
-                  <Image style={{width: '100%', height: '100%'}} source={{uri: post.photo}} />
+                {form['photo'].value ? (
+                  <Image style={{width: '100%', height: '100%', borderRadius: 8}} source={{uri: form['photo'].value}} />
                 ) : (
                   <SimpleLineIcons size={48} color="rgba(0,0,0,0.4)" name='picture' />
                 )}
               </TouchableOpacity>
+              {form['photo'].error && (
+                <Text style={styles.photoError}>{form['photo'].error}</Text>
+              )}
 
-              <Camera ref={cameraRef} getFile={getFile} />
+              <Camera ref={cameraRef} getFile={setFormKeys['photo']} />
             </>
           )}
         </Form>

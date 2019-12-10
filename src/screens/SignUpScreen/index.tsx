@@ -68,7 +68,7 @@ const RenderForm: React.FC<FormProps> = (props) => {
       {(form, setFormKeys) => (
         <>
           <Input
-            label="Full name"
+            label="Full Name"
             error={form['full_name'].error}
             value={form['full_name'].value}
             onChangeText={setFormKeys['full_name']}
@@ -89,13 +89,13 @@ const RenderForm: React.FC<FormProps> = (props) => {
           />
           <Input
             secureTextEntry={true}
-            label="Confirm password"
+            label="Confirm Password"
             error={form['confirm_password'].error}
             value={form['confirm_password'].value}
             onChangeText={setFormKeys['confirm_password']}
             keyboardType={'web-search'}
           />
-          <Button type="primary" onPress={onSubmit}>Register</Button>
+          <Button style={{height: 46}} type="primary" onPress={onSubmit}>Register</Button>
         </>
       )}
     </Form>

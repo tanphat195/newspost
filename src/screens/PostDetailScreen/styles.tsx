@@ -48,7 +48,6 @@ export default StyleSheet.create({
     flexDirection: 'column',
   },
   mapsWrapper: {
-    height: 240,
     paddingBottom: 20,
   },
   addressWrapper: {
@@ -61,6 +60,6 @@ export default StyleSheet.create({
   },
   maps: {
     width: '100%',
-    height: '100%',
+    height: 240,
   }
 });

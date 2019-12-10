@@ -11,25 +11,21 @@ export default StyleSheet.create({
   },
   title: {
   },
-  action: {
-    width: '100%',
-    height: 160,
-    // position: 'absolute',
-    // bottom: 0,
-    shadowOffset: {width: 0, height: -1},
-    shadowColor: 'rgba(0,0,0,0.2)',
-    shadowOpacity: 1,
-    shadowRadius: 2,
-  },
   photo: {
-    backgroundColor: 'rgba(250,250,250,1)',
+    backgroundColor: 'rgba(240,240,240,1)',
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
     height: 210,
+    borderRadius: 8,
+    borderStyle: 'dashed',
     borderWidth: 2,
-    borderColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 4,
+    borderColor: 'rgba(0,0,0,0.2)',
   },
+  photoError: {
+    color: '#f4115d',
+    marginTop: 3,
+    marginLeft: 3,
+  }
 });

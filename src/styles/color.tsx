@@ -1,2 +1,2 @@
-export const secondary = '#fd5068';
-export const primary = '#41BAEE';
+export const primary = '#fd5068';
+export const secondary = '#41BAEE';

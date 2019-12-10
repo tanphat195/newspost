@@ -28,16 +28,6 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
   },
-  photoWrapper: {
-    width: '100%',
-    height: '100%',
-    paddingHorizontal: 50,
-    paddingVertical: 110,
-    // shadowOffset: { width: 0, height: 0 },
-    // shadowColor: 'rgba(250,250,250,1)',
-    // shadowOpacity: 1,
-    // shadowRadius: 5,
-  },
   photo: {
     width: '100%',
     height: '100%',

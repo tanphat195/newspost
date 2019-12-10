@@ -25,11 +25,11 @@ const Input: React.FC<Props> = (props) => {
       {props.label && (
         <View pointerEvents='none'style={[
           styles.viewText,
-          (isFocused || props.value) && styles.viewText_hover,
+          (isFocused || props.value) && styles.viewText_focus,
         ]}>
           <Text style={[
             styles.labelText,
-            (isFocused || props.value) && styles.labelText_hover,
+            (isFocused) && styles.labelText_focus,
           ]}>
             {props.label}
           </Text>

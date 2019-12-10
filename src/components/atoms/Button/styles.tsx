@@ -3,7 +3,7 @@ import { primary } from '../../../styles/color';
 
 export default StyleSheet.create({
   main: {
-    height: 40,
+    height: 42,
     borderRadius: 4,
     display: 'flex',
     alignItems: 'center',
