@@ -95,8 +95,8 @@ router.put('/update_profile', (req, res) => {
   authAction.authenticate(req, (err, user) => {
     if (!err) {
       userAction.updateProfile({...req.body, email: user.email})
-        .then(() => {
-          res.json({ user: {...req.body, email: user.email}})
+        .then(finalUser => {
+          res.json({ user: finalUser})
         })
         .catch(errors => res.status(403).json({errors}))
     } else {

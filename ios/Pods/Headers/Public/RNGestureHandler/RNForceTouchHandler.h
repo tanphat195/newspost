@@ -1,4 +1,1 @@
-#import "RNGestureHandler.h"
-
-@interface RNForceTouchHandler : RNGestureHandler
-@end
+../../../RNGestureHandler/ios/Handlers/RNForceTouchHandler.h

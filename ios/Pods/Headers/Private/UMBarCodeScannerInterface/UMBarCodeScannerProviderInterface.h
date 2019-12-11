@@ -1,9 +1,1 @@
-// Copyright 2016-present 650 Industries. All rights reserved.
-
-#import <UMBarCodeScannerInterface/UMBarCodeScannerInterface.h>
-
-@protocol UMBarCodeScannerProviderInterface
-
-- (id<UMBarCodeScannerInterface>)createBarCodeScanner;
-
-@end
+../../../../../node_modules/unimodules-barcode-scanner-interface/ios/UMBarCodeScannerInterface/UMBarCodeScannerProviderInterface.h

@@ -1,6 +1,1 @@
-// Copyright 2018-present 650 Industries. All rights reserved.
-
-#import <UMCore/UMInternalModule.h>
-
-@interface UMReactFontManager : NSObject <UMInternalModule>
-@end
+../../../../../node_modules/@unimodules/react-native-adapter/ios/UMReactNativeAdapter/Services/UMReactFontManager.h

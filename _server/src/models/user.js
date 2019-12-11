@@ -30,7 +30,8 @@ const createUser = async (user) => {
 
 const updateUser = async (user) => {
   const get_user = await getUser(user.email);
-  return Caching.hset(CachingKey.USERS_KEY, user.email, JSON.stringify({...get_user, ...user}))
+  await Caching.hset(CachingKey.USERS_KEY, user.email, JSON.stringify({...get_user, ...user}))
+  return userToJSON({...get_user, ...user})
 }
 
 const removeUser = (email) => {
@@ -38,5 +39,5 @@ const removeUser = (email) => {
 }
 
 module.exports = {
-  getUser, getUsers, createUser, updateUser, removeUser,
+  getUser, getUsers, createUser, updateUser, removeUser, userToJSON,
 }

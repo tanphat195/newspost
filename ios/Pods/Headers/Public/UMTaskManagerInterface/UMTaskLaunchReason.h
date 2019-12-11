@@ -1,12 +1,1 @@
-// Copyright 2018-present 650 Industries. All rights reserved.
-
-typedef enum {
-  UMTaskLaunchReasonUnrecognized,
-  UMTaskLaunchReasonUser,
-  UMTaskLaunchReasonBluetoothCentrals,
-  UMTaskLaunchReasonBluetoothPeripherals,
-  UMTaskLaunchReasonBackgroundFetch,
-  UMTaskLaunchReasonLocation,
-  UMTaskLaunchReasonNewsstandDownloads,
-  UMTaskLaunchReasonRemoteNotification,
-} UMTaskLaunchReason;
+../../../../../node_modules/unimodules-task-manager-interface/ios/UMTaskManagerInterface/UMTaskLaunchReason.h

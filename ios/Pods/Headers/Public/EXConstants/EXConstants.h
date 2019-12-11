@@ -1,8 +1,1 @@
-// Copyright 2015-present 650 Industries. All rights reserved.
-
-#import <UMCore/UMExportedModule.h>
-#import <UMCore/UMModuleRegistryConsumer.h>
-
-@interface EXConstants : UMExportedModule <UMModuleRegistryConsumer>
-
-@end
+../../../../../node_modules/expo-constants/ios/EXConstants/EXConstants.h

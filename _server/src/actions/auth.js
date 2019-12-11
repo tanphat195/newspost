@@ -40,8 +40,8 @@ const signUp = async (body, callback) => {
       avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySUvnmtdzOdplk95Fa5ziU0jSCJ6QrrXdTVWRXexIyMNEdflI',
     }
 
-    const newUser = await User.createUser(user)
-    if (newUser) {
+    const result = await User.createUser(user)
+    if (result) {
       const secret = bcrypt.genSaltSync(10)
       const token = jwt.sign({ email }, secret, { expiresIn: config.jwtExpiresIn })
 
@@ -52,10 +52,10 @@ const signUp = async (body, callback) => {
       const get_logged = await LoggedUser.getLoggedUser(email)
       
       if (get_logged) {
-        return callback(null, {_cookie, user: get_user})
+        return callback(null, {_cookie, user: User.userToJSON(get_user)})
       } else {
         await LoggedUser.createLoggedUser({ email, token })
-        return callback(null, {_cookie, user: get_user})
+        return callback(null, {_cookie, user: User.userToJSON(get_user)})
       }
     } else {
       return callback(err)
@@ -73,7 +73,6 @@ const signIn = async (body, callback) => {
     callback({status: 401, msg: 'Password must be more than 8 characters'})
   } else {
     const get_user = await User.getUser(email)
-    console.log(get_user)
     if (!get_user) {
       callback({status: 401, msg: 'Invalid login credentials. Please try again.'})
     } else {
@@ -89,10 +88,10 @@ const signIn = async (body, callback) => {
         const get_logged = await LoggedUser.getLoggedUser(email)
         
         if (get_logged) {
-          callback(null, {_cookie, user: get_user})
+          callback(null, {_cookie, user: User.userToJSON(get_user)})
         } else {
           await LoggedUser.createLoggedUser({ email, token })
-          callback(null, {_cookie, user: get_user})
+          callback(null, {_cookie, user: User.userToJSON(get_user)})
         }
       } else {
         callback({status: 401, msg: 'The password is not correct'})
@@ -190,7 +189,7 @@ const fetch = async (authCookie, callback) => {
     if (get_logged) {
       const get_user = await User.getUser(_email)
       if (get_user) {
-        callback(null, get_user)
+        callback(null, User.userToJSON(get_user))
       } else {
         callback({status: 401, msg: 'User not found'})
       }
